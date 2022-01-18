@@ -1,0 +1,222 @@
+
+
+<!-- App root -->
+<div class="flex flex-col flex-auto min-w-0">
+    <!-- Header -->
+    <div class="dark bg-card dark:border-b">
+        <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
+            <div class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 my-8 sm:my-12">
+                <!-- Avatar and name -->
+                <div class="flex flex-auto items-center min-w-0">
+                    <div class="flex flex-col min-w-0 ml-4">
+                        <div class="flex items-center">
+                            <div class="mt-1 text-4xl sm:text-7xl font-extrabold tracking-tight leading-tight text-center">
+                                Gestion comptes
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Actions -->
+                <div class="flex items-center mt-6 sm:mt-0 sm:ml-2 space-x-3">
+                    <button
+                        class="fuse-mat-button-rounded bg-accent-600"
+                        mat-flat-button
+                        [color]="'accent'"
+                        [routerLink]="'/admin'">
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:library'"></mat-icon>
+                        <span class="ml-2">Administration</span>
+                    </button>
+                    <button
+                        class="fuse-mat-button-rounded"
+                        mat-flat-button
+                        [color]="'primary'"
+                        [routerLink]="'/admin/Users/add'">
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:plus-sm'"></mat-icon>
+                        <span class="ml-2">Ajouter</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Project selector -->
+
+        </div>
+    </div>
+    <mat-spinner class="wrapper" style="margin:0 auto;"
+                 mode="indeterminate" *ngIf="load">    </mat-spinner>
+
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full min-w-0">
+
+        <fuse-card *ngFor="let member of users"
+        class="flex flex-col max-w-80 w-full filter-article filter-interactive"
+        [flippable]="true"
+        [face]="'front'"
+        #flippableCard01="fuseCard">
+        <ng-container fuseCardFront >
+
+            <div class="flex flex-col flex-auto items-center bg-card shadow rounded-xl overflow-hidden">
+                <!-- Avatar & Info -->
+                <div class="flex flex-col flex-auto w-full p-8 text-left mt-3 -mx-3">
+                    <button
+                        class="px-3"
+                        mat-button
+                        [color]="'primary'"
+                        (click)="flippableCard01.face = flippableCard01.face === 'front' ? 'back' : 'front'">
+                        Details
+                    </button>
+
+                <button
+                    class="ml-auto -mr-4"
+                    mat-icon-button
+                    [matMenuTriggerFor]="postCardMenu08">
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
+                </button>
+                <mat-menu #postCardMenu08="matMenu"    >
+                    <button mat-menu-item  data-toggle="modal" data-target="#exampleModalCenter" (click)="selectToDelete(member.id)">
+                            <span class="flex items-center">
+                                <mat-icon
+                                    class="icon-size-5 mr-3"
+                                    [svgIcon]="'heroicons_outline:trash'"></mat-icon>
+                                <span>Supprimer</span>
+                            </span>
+                    </button>
+                    <!-- Modal<button mat-menu-item (click)="update(member.id)">
+                            <span class="flex items-center">
+                                <mat-icon
+                                    class="icon-size-5 mr-3"
+                                    [svgIcon]="'heroicons_outline:pencil-alt'"></mat-icon>
+                                <span>Modifier</span>
+                            </span>
+                    </button> -->
+
+                    <button mat-menu-item (click)="Bloque(member.id)">
+                            <span class="flex items-center">
+                                <mat-icon
+                                    class="icon-size-5 mr-3"
+                                    [svgIcon]="'heroicons_outline:ban'"></mat-icon>
+                                <span>Bloque</span>
+                            </span>
+                    </button>
+                    <button mat-menu-item (click)="Active(member.id)">
+                            <span class="flex items-center">
+                                <mat-icon
+                                    class="icon-size-5 mr-3"
+                                    [svgIcon]="'heroicons_outline:badge-check'"></mat-icon>
+                                <span>Activer</span>
+                            </span>
+                    </button>
+
+                </mat-menu>
+                </div>
+                <!-- details member-->
+                <div class="flex flex-col flex-auto w-full p-8 text-center">
+
+
+                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden">
+                        <ng-container *ngIf="member.picture">
+                            <img
+                                class="object-cover w-full h-full"
+                                [src]="sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'+ member.picture )"
+                                alt=""/>
+                        </ng-container>
+                        <ng-container *ngIf="!member.picture">
+                            <div class="flex items-center justify-center w-full h-full rounded-full text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                                {{member.first_name.charAt(0)}}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="mt-6 font-medium">{{member.first_name}}</div>
+                    <div class="text-secondary">{{member.title}}</div>
+                    <div *ngIf="member.etat==='ACTIF'">
+                        <p class="text-success">{{member.etat}}</p></div>
+                    <div *ngIf="member.etat==='BLOQUE'">
+                        <p class="text-danger">{{member.etat}}</p></div>
+                    <div *ngIf="member.etat==='DEACTIVE'">
+                        <p class="text-info">{{member.etat}}</p></div>
+                </div>
+                <!-- Email & Phone -->
+                <div class="flex items-center w-full border-t divide-x">
+                    <a
+                        class="flex flex-auto items-center justify-center py-4 hover:bg-hover"
+                        [href]="'mailto:' + member.email">
+                        <mat-icon
+                            class="icon-size-5 text-hint"
+                            [svgIcon]="'heroicons_solid:mail'"></mat-icon>
+                        <span class="ml-2">Email</span>
+                    </a>
+                    <a
+                        class="flex flex-auto items-center justify-center py-4 hover:bg-hover"
+                        [href]="'tel:' + member.phone">
+                        <mat-icon
+                            class="icon-size-5 text-hint"
+                            [svgIcon]="'heroicons_solid:phone'"></mat-icon>
+                        <span class="ml-2">Call</span>
+                    </a>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container fuseCardBack >
+            <div class="flex flex-col flex-auto m-4">
+                <button
+                    class="ml-1.5"
+                    mat-icon-button
+                    (click)="flippableCard01.face = flippableCard01.face === 'front' ? 'back' : 'front'">
+                    <mat-icon [svgIcon]="'heroicons_outline:arrow-narrow-left'"></mat-icon>
+                </button>
+                <div class="m-4 mt-3">
+                    <div class="text-2xl font-semibold leading-tight">
+                        {{member.first_name}}
+                    </div>
+                    <div class="mt-4">
+                        {{member.name_user}}
+                    </div>
+                    <div class="mt-4">
+                        {{member.title}}
+                    </div>
+                    <div class="mt-4">
+                        {{member.email}}
+                    </div>
+                    <div class="mt-4">
+                        {{member.phone}}
+                    </div>
+                    <div class="mt-4">
+                        {{member.gender}}
+                    </div>
+                    <div class="mt-4">
+                        {{member.date_birth|date:'dd-MM-yyyy'}}
+                    </div>
+                    <div class="mt-4">
+                        {{member.age}} ans
+                    </div>
+
+                </div>
+            </div>
+        </ng-container>
+    </fuse-card>
+    </div>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h1>Supprimer le compte</h1>
+                    <p>Êtes-vous sûr de vouloir supprimer votre compte ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-danger"(click)="onDelete(IDDelete)" data-dismiss="modal">Supprimer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

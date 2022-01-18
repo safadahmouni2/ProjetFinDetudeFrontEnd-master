@@ -1,0 +1,150 @@
+<div class="flex flex-col flex-auto min-w-0">
+    <!-- Header -->
+    <div class="dark bg-card dark:border-b">
+        <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
+            <div class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 my-8 sm:my-12">
+                <!-- Avatar and name -->
+                <div class="flex flex-auto items-center min-w-0">
+                    <div class="flex flex-col min-w-0 ml-4">
+                        <div class="flex items-center">
+                            <div class="mt-1 text-4xl sm:text-7xl font-extrabold tracking-tight leading-tight text-center">
+                                Gestion Roles
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Actions -->
+                <div class="flex items-center mt-6 sm:mt-0 sm:ml-2 space-x-3">
+                    <button
+                        class="fuse-mat-button-rounded bg-accent-600"
+                        mat-flat-button
+                        [color]="'accent'"
+                        [routerLink]="'/admin'">
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:library'"></mat-icon>
+                        <span class="ml-2">Administration</span>
+                    </button>
+
+                </div>
+            </div>
+            <!-- Project selector -->
+
+        </div>
+    </div>
+
+    <mat-drawer-container
+        class="flex-auto h-full bg-card dark:bg-transparent"
+        >
+
+        <!-- Drawer -->
+        <mat-drawer
+            class="w-full sm:w-128 dark:bg-gray-900"
+            [mode]="drawerMode"
+            [opened]="false"
+            [position]="'end'"
+            [disableClose]="true"
+            #matDrawer>
+            <router-outlet></router-outlet>
+        </mat-drawer>
+
+        <mat-drawer-content class="flex flex-col">
+
+            <!-- Main -->
+            <div class="flex flex-col flex-auto">
+
+                <!-- Header -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between py-8 px-6 md:px-8">
+                    <!-- Title -->
+                    <div>
+                        <div class="text-4xl font-extrabold tracking-tight leading-none">Roles</div>
+
+                    </div>
+                    <!-- Actions -->
+                </div>
+
+                <!-- Tasks list *ngIf="tasks && tasks.length > 0; else noTasks" /[cdkDropListData]="tasks"
+                        (cdkDropListDropped)="dropped($event)"-->
+                <ng-container >
+                    <div
+                        class="divide-y"
+                        cdkDropList
+                        >
+
+                        <!-- Task -->
+                        <ng-container *ngFor="let role of roles">
+                            <div
+                                [id]="'task-' + role.id"
+                                class="group w-full select-none hover:bg-gray-100 dark:hover:bg-hover"
+                                [ngClass]="{'h-12 text-lg font-semibold bg-gray-50 dark:bg-transparent': role.id === 'section',
+                                            'h-16': role.condition === 'task',
+                                            'text-hint': role.condition}"
+                                cdkDrag
+                                >
+
+
+                                <!-- Task content -->
+                                <div class="relative flex items-center h-full pl-10">
+
+                                    <ng-container *ngIf="RoleM && RoleM.id === role.id">
+                                        <div class="z-10 absolute -top-px right-0 -bottom-px flex flex-0 w-1 bg-primary"></div>
+                                    </ng-container>
+
+
+                                    <!-- Complete task button -->
+                                    <button
+                                        class="mr-2 -ml-2.5 leading-none"
+                                        (click)="change(role.id)"
+                                        mat-icon-button>
+                                        <ng-container *ngIf="role.condition"  >
+                                            <mat-icon
+                                                class="text-primary"
+                                                [svgIcon]="'heroicons_outline:check-circle'"></mat-icon>
+                                        </ng-container>
+                                        <ng-container *ngIf="!role.condition"  >
+                                            <mat-icon
+                                                class="text-hint"
+                                                [svgIcon]="'heroicons_outline:check-circle'"></mat-icon>
+                                        </ng-container>
+                                    </button>
+
+                                    <!-- Task link -->
+                                    <div
+                                        class="flex flex-auto items-center min-w-0 h-full pr-7"
+                                        [routerLink]="[role.id]">
+                                        <!-- Title & Placeholder -->
+                                        <div class="flex-auto mr-2 truncate">
+                                            <ng-container >
+                                                <h2>{{role.name_roles}}:</h2>
+                                                <span>{{role.desc_roles}}</span>
+
+                                            </ng-container>
+
+                                        </div>
+                                        <!-- Priority -->
+                                        <!-- Due date -->
+
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+
+                </ng-container>
+
+                <ng-template #noTasks>
+                    <div class="flex flex-auto flex-col items-center justify-center bg-gray-100 dark:bg-transparent">
+                        <mat-icon
+                            class="icon-size-24"
+                            [svgIcon]="'iconsmind:bulleted_list'"></mat-icon>
+                        <div class="mt-4 text-2xl font-semibold tracking-tight text-secondary">Add a task to start planning!</div>
+                    </div>
+                </ng-template>
+
+            </div>
+
+        </mat-drawer-content>
+
+    </mat-drawer-container>
+
+</div>

@@ -1,0 +1,296 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Competance</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Forms</a>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Competance
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main -->
+
+    <div class="flex-auto p-6 sm:p-10">
+
+        <div class="max-w-3xl">
+
+
+            <div class="flex flex-col mt-4 px-8 pt-10 bg-card shadow rounded overflow-hidden">
+                <div class="container">
+                    <div class="text-center">
+
+                        <input  class="form-control" type="file" (change)="onChange($event)">
+                        <br>
+                        <br>
+                        <br>
+
+                        <div class="mt-4 sm:mt-0">
+                            <button mat-flat-button="" (click)="onUpload()" class="mat-focus-indicator mat-flat-button mat-button-base mat-primary" ng-reflect-color="success"><span class="mat-button-wrapper">
+                            <mat-icon role="img" class="mat-icon notranslate mat-icon-no-color" aria-hidden="true" ng-reflect-svg-icon="heroicons_outline:plus" data-mat-icon-type="svg" data-mat-icon-name="plus" data-mat-icon-namespace="heroicons_outline">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+        </svg></mat-icon><span class="ml-2 mr-1">Upload file</span></span><span matripple="" class="mat-ripple mat-button-ripple" ng-reflect-disabled="false" ng-reflect-centered="false" ng-reflect-trigger="[object HTMLButtonElement]"></span><span class="mat-button-focus-overlay">
+
+                            </span></button></div>
+                    </div>
+
+                    <!-- Shareable short link of uoloaded file -->
+                    <div class="container text-center jumbotron"
+                         *ngIf="shortLink">
+                        <h2> Visit Here</h2>
+                        <a href="{{shortLink}}">{{shortLink}}</a>
+                    </div>
+
+                    <!--Flag variable is used here-->
+                    <div class="container" *ngIf="loading">
+                        <h3>Loading ...</h3>
+                    </div>
+
+                </div>
+                <br>
+                <br>
+
+                <!--name-->
+                <mat-divider class="mt-6 mb-10"></mat-divider>
+                <div class="flex flex-col gt-xs:flex-row">
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <input
+                            matInput
+                            [placeholder]="'Nom'"
+                            id="name" class="input" type="text" placeholder=" " [(ngModel)]="competanceFiles.name"/>
+                        <mat-icon
+                            class="icon-size-5"
+                            matPrefix
+                            [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                    </mat-form-field>
+
+                </div>
+                <!--mail-->
+                <div class="flex flex-col gt-xs:flex-row">
+                    <mat-form-field class="flex-auto">
+                        <input
+                            matInput
+                            [placeholder]="'Email addresse'"
+                            id="mail" class="input" type="text" placeholder=" " [(ngModel)]="competanceFiles.mail"/>
+                        <mat-icon
+                            class="icon-size-5"
+                            matPrefix
+                            [svgIcon]="'heroicons_solid:mail'"></mat-icon>
+                    </mat-form-field>
+                </div>
+                <!--phone-->
+                <div class="flex flex-col gt-xs:flex-row">
+                    <mat-form-field class="flex-auto">
+                        <input
+                            matInput
+                            [placeholder]="'N° télèphone'"
+                            id="phone" class="input" type="text" placeholder=" " [(ngModel)]="competanceFiles.phone"/>
+                        <mat-icon
+                            class="icon-size-5"
+                            matPrefix
+                            [svgIcon]="'heroicons_solid:phone'"></mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-col gt-xs:flex-row" appearance="fill">
+                    <!--post-->
+                    <mat-form-field class="example-chip-list" appearance="fill">
+                        <mat-chip-list #chipList aria-label="Fruit selection">
+                            <mat-chip
+                                *ngFor="let fruit of competanceFiles.poste"
+                                [selectable]="selectable"
+                                [removable]="removable"
+                                (removed)="removePoste(fruit)">
+                               <span *ngIf="!fruit.delete">
+                                   {{fruit.name}}
+                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon></span>
+                            </mat-chip>
+                            <input
+                                placeholder="Postes"
+                                #fruitInput
+                                [formControl]="fruitCtrl"
+                                [matAutocomplete]="auto"
+                                [matChipInputFor]="chipList"
+                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                (matChipInputTokenEnd)="addPoste($event)">
+                        </mat-chip-list>
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedPoste($event)">
+                            <mat-option *ngFor="let fruit of filteredFruits| async" [value]="fruit">
+                                {{fruit}}
+                            </mat-option>
+                        </mat-autocomplete>
+
+                        <mat-icon
+                            class="icon-size-5"
+                            matPrefix
+                            [svgIcon]="'heroicons_solid:briefcase'"></mat-icon>
+                    </mat-form-field>
+                    <!--ecole1-->
+                    <mat-form-field class="flex-auto gt-xs:pr-3" appearance="fill">
+                        <mat-chip-list #chipList1 aria-label="Fruit selection">
+                            <mat-chip
+                                *ngFor="let fruit of competanceFiles.ecole"
+                                [selectable]="selectable"
+                                [removable]="removable"
+                                (removed)="removeEcole(fruit)">
+                                <span *ngIf="!fruit.delete">
+                                {{fruit.name}}
+                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon></span>
+                            </mat-chip>
+                            <input
+                                [placeholder]="'Ecole'"
+                                #fruitInput
+                                [formControl]="fruitCtrl1"
+                                [matAutocomplete]="auto1"
+                                [matChipInputFor]="chipList1"
+                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                (matChipInputTokenEnd)="addEcole($event)">
+                        </mat-chip-list>
+                        <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="selectedEcole($event)">
+                            <mat-option *ngFor="let fruit of filteredFruits1| async" [value]="fruit">
+                                {{fruit}}
+                            </mat-option>
+                        </mat-autocomplete>
+
+                        <mat-icon
+                            class="icon-size-5"
+                            matPrefix
+                            role="img" class="mat-icon notranslate fuse-vertical-navigation-item-icon mat-icon-no-color ng-star-inserted" aria-hidden="true" ng-reflect-svg-icon="heroicons_outline:academic-cap" data-mat-icon-type="svg" data-mat-icon-name="academic-cap" data-mat-icon-namespace="heroicons_outline"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
+                            <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                            <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path>
+                        </svg></mat-icon>
+                    </mat-form-field>
+                    <!--languages2-->
+                    <mat-form-field class="flex-auto gt-xs:pl-3" appearance="fill">
+                        <mat-chip-list #chipList2 aria-label="Fruit selection">
+                            <mat-chip
+                                *ngFor="let fruit of competanceFiles.languages"
+                                [selectable]="selectable"
+                                [removable]="removable"
+                                (removed)="removeLan(fruit)">
+                                <span *ngIf="!fruit.delete">
+                                {{fruit.lang_name}}
+                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon></span>
+                            </mat-chip>
+                            <input
+                                [placeholder]="'Languages'"
+                                #fruitInput
+                                [formControl]="fruitCtrl2"
+                                [matAutocomplete]="auto2"
+                                [matChipInputFor]="chipList2"
+                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                (matChipInputTokenEnd)="addLan($event)">
+                        </mat-chip-list>
+                        <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="selectedLan($event)">
+                            <mat-option *ngFor="let fruit of filteredFruits2 | async" [value]="fruit">
+                                {{fruit}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <mat-icon
+                            class="icon-size-5"
+                            matPrefix
+                            [svgIcon]="'heroicons_solid:translate'"></mat-icon>
+                    </mat-form-field>
+                    <!--experience3-->
+                    <mat-form-field class="example-chip-list" appearance="fill">
+                        <mat-chip-list #chipList3 aria-label="Fruit selection">
+                            <mat-chip
+                                *ngFor="let fruit of competanceFiles.experiences"
+                                [selectable]="selectable"
+                                [removable]="removable"
+                                (removed)="removeExp(fruit)">
+                                 <span *ngIf="!fruit.delete">
+                                {{fruit.title}}
+                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                 </span>
+                            </mat-chip>
+                            <input
+                                [placeholder]="'Experiences'"
+                                #fruitInput
+                                [formControl]="fruitCtrl3"
+                                [matAutocomplete]="auto3"
+                                [matChipInputFor]="chipList3"
+                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                (matChipInputTokenEnd)="addExp($event)">
+                        </mat-chip-list>
+                        <mat-autocomplete #auto3="matAutocomplete" (optionSelected)="selectedExp($event)">
+                            <mat-option *ngFor="let fruit of filteredFruits3 | async" [value]="fruit">
+                                {{fruit}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <mat-icon
+                            class="icon-size-5"
+                            matPrefix
+                            [svgIcon]="'heroicons_solid:pencil'"></mat-icon>
+                    </mat-form-field>
+                    <!--skills4-->
+                    <mat-form-field class="example-chip-list" appearance="fill">
+                        <mat-chip-list #chipList4 aria-label="Fruit selection">
+                            <mat-chip
+                                *ngFor="let fruit of competanceFiles.skills"
+                                [selectable]="selectable"
+                                [removable]="removable"
+                                (removed)="removeSkill(fruit)">
+                                 <span *ngIf="!fruit.delete">
+                                {{fruit.name}}
+                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                 </span>
+                            </mat-chip>
+                            <input
+                                [placeholder]="'Competances'"
+                                #fruitInput
+                                [formControl]="fruitCtrl4"
+                                [matAutocomplete]="auto4"
+                                [matChipInputFor]="chipList4"
+                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                (matChipInputTokenEnd)="addSkill($event)">
+                        </mat-chip-list>
+                        <mat-autocomplete #auto4="matAutocomplete" (optionSelected)="selectedSkill($event)">
+                            <mat-option *ngFor="let fruit of filteredFruits4| async" [value]="fruit">
+                                {{fruit}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <mat-icon
+                            class="icon-size-5"
+                            matPrefix
+                            [svgIcon]="'heroicons_solid:sparkles'"></mat-icon>
+                    </mat-form-field>
+
+                </div>
+
+                <div class="flex items-center justify-end border-t -mx-8 mt-8 px-8 py-5 bg-gray-50 dark:bg-gray-700">
+                    <button mat-button [routerLink]="'/apps/CompetencesFiles/liste'">
+                        Annuler
+                    </button>
+                    <button
+                        class="px-6 ml-3"
+                        mat-flat-button
+                        [color]="'primary'"
+                        (click)="editCV()">
+                        Save
+                    </button>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>

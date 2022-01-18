@@ -1,0 +1,104 @@
+<div class="flex flex-col max-w-240 md:min-w-160 -m-6">
+
+    <!-- Header -->
+    <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+        <div class="text-lg font-medium">Nouveau offre</div>
+        <button
+            mat-icon-button
+            (click)="Close()"
+            [tabIndex]="-1">
+            <mat-icon
+                class="text-current"
+                [svgIcon]="'heroicons_outline:x'"></mat-icon>
+        </button>
+    </div>
+
+    <!-- Compose form -->
+    <div
+        class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto"
+    >
+
+        <div class="flex flex-col gt-xs:flex-row">
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <input
+                    matInput
+                    [placeholder]="'Titre'"
+                    id="Titre" class="input" type="text" placeholder=" " [(ngModel)]="dem.title"/>
+
+            </mat-form-field>
+
+        </div>
+        <div class="flex flex-col gt-xs:flex-row">
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <input
+                    matInput
+                    [placeholder]="'Description'"
+                    id="Description" class="input" type="text" placeholder=" " [(ngModel)]="dem.description"/>
+
+            </mat-form-field>
+
+        </div>
+        <div class="flex flex-col gt-xs:flex-row">
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <input
+                    matInput
+                    [placeholder]="'Link'"
+                    id="link" class="input" type="text" placeholder=" " [(ngModel)]="dem.link" />
+
+            </mat-form-field>
+
+        </div>
+        <div class="flex flex-col gt-xs:flex-row">
+
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <input
+                    matInput
+                    [matDatepicker]="birthdayDatepicker1"
+                    [(ngModel)]="dem.start_date"
+                    [placeholder]="'Date debut'"
+                >
+                <mat-datepicker-toggle
+                    matSuffix
+                    [for]="birthdayDatepicker1">
+                </mat-datepicker-toggle>
+                <style>
+                    .mat-datepicker-calendar-pane {
+                        z-index: 1200;
+                    }
+                </style>
+                <mat-datepicker #birthdayDatepicker1 class="mat-datepicker-calendar-pane" ></mat-datepicker>
+
+            </mat-form-field>
+
+        </div>
+        <div class="flex flex-col gt-xs:flex-row">
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <input
+                    matInput
+                    [matDatepicker]="birthdayDatepicker"
+                    [(ngModel)]="dem.closing_date"
+                    [placeholder]="'Date fin'"
+                >
+                <mat-datepicker-toggle
+                    matSuffix
+                    [for]="birthdayDatepicker">
+                </mat-datepicker-toggle>
+                <mat-datepicker #birthdayDatepicker></mat-datepicker>
+
+
+            </mat-form-field>
+
+        </div>
+
+        <div class="flex items-center mt-4 sm:mt-0">
+
+            <button
+                class="order-first sm:order-last"
+                mat-flat-button
+                [color]="'primary'"
+                (click)="addDem()">
+                ajouter
+            </button>
+        </div>
+    </div>
+</div>

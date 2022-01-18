@@ -1,0 +1,58 @@
+.container {
+    display: grid;
+    grid-template-columns: 100% 0%;
+    width: 36%;
+}
+.container button {
+    background: transparent;
+    border: 0;
+    transform: translateX(-40px);
+    cursor: pointer;
+}
+.container button:focus {
+    outline: 0;
+}
+buttonn {
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    font-size: 50px;
+    text-align: center;
+    border-radius: 5px;
+    outline: none;
+}
+modall {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+}
+.cdk-overlay-pane {
+    position: absolute;
+    pointer-events: auto;
+    box-sizing: border-box;
+    z-index: 1000;
+    display: flex;
+    max-width: 100%;
+    max-height: 100%;
+}
+.example-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.example-container > * {
+    width: 100%;
+}
+::ng-deep .cdk-overlay-container mat-datepicker{
+    z-index:2000;
+}
+mat-form-field {
+    margin-right: 12px;
+}

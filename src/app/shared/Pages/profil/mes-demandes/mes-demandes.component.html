@@ -1,0 +1,560 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col shadow bg-card"
+    >
+        <!-- Cover image -->
+        <div>
+            <img
+                class="h-40 lg:h-80 object-cover"
+                src="../../../../../assets/images/pages/profile/cover.jpg"
+                alt="Cover image">
+        </div>
+
+        <!-- User info -->
+        <div class="flex flex-col flex-0 lg:flex-row items-center max-w-5xl w-full mx-auto px-8 lg:h-18 bg-card">
+
+            <!-- Avatar -->
+            <div class="-mt-26 lg:-mt-22 rounded-full">
+                <ng-container *ngIf="user.picture">
+                    <img
+                        class="w-32 h-32 rounded-full ring-4 ring-bg-card"
+                        [src]="sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'+ user.picture )"
+                        alt="User avatar"/>
+                </ng-container>
+                <ng-container *ngIf="!user.picture">
+                    <div class="flex items-center justify-center w-12 min-w-12 h-12 rounded-full mr-4text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                        {{userData.first_name.charAt(0)}}
+                    </div>
+                </ng-container>
+            </div>
+
+            <!-- Details -->
+            <div class="flex flex-col items-center lg:items-start mt-4 lg:mt-0 lg:ml-8">
+                <div class="text-lg font-bold leading-none">{{userData.first_name}} {{userData.name_user}}</div>
+                <div class="text-secondary">{{user.pays}}</div>
+            </div>
+
+            <!-- Separator -->
+            <div class="hidden lg:flex h-8 mx-8 border-l-2"></div>
+
+
+            <!-- Stats -->
+            <div class="flex items-center mt-6 lg:mt-0 space-x-6">
+                <div class="flex flex-col items-center">
+
+                    <span class="font-bold" >{{abonnee}}</span>
+                    <a class="font-medium"
+                       [routerLink]="['/apps/profil/abonnee']">
+                        <span class="text-sm font-medium text-secondary">ABONNÉS</span></a>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="font-bold"> {{abonnement}}</span>
+                    <a class="font-medium"
+                       [routerLink]="['/apps/profil/abonnement']">
+                        <span class="text-sm font-medium text-secondary ">ABONNEMENTS</span></a>
+                </div>
+            </div>
+
+            <!-- Menu -->
+            <div class="flex lg:place-items-end mt-8 mb-4 lg:m-0 lg:ml-auto space-x-6">
+                <a
+                    class="font-medium"
+                    [routerLink]="['/apps/profil']">
+                    Publications
+                </a>
+                <a
+                    class="font-medium"
+                    [routerLink]="['/apps/profil/mesDemandes']">
+                    Demandes
+                </a>
+                <a
+                    class="font-medium"
+                    [routerLink]="['/apps/profil/postule']">
+                    Postules
+                </a>
+                <button
+                    class="order-first sm:order-last"
+                    mat-flat-button
+                    [color]="'primary'"
+                    [routerLink]="'/apps/CompetencesFiles/ajouter'" >
+                    Créer cv
+                </button>
+                <button
+                    class="order-first sm:order-last"
+                    mat-flat-button
+                    [color]="'primary'"
+                    (click)="MesCV(userData.id)" >
+                    Mes cv
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Main -->
+    <div class="flex flex-auto justify-center w-full max-w-5xl mx-auto p-6 sm:p-8">
+
+        <!-- Column -->
+        <div class="hidden lg:flex flex-col items-start mr-8">
+
+            <!-- About me -->
+            <fuse-card class="flex flex-col max-w-80 w-full p-8"
+                       [flippable]="true"
+                       [face]="'front'"
+                       #flippableCard01="fuseCard">
+
+                <ng-container fuseCardFront >
+                    <div class="flex flex-col l-120 flex- items-center bg-card shadow rounded-xl overflow-hidden">
+                        <div class="flex flex-col flex-auto l-120 w-full p-8 text-center">
+
+                        <button
+                            class="px-3"
+                            mat-button
+                            [color]="'primary'"
+                            (click)="flippableCard01.face = flippableCard01.face === 'front' ? 'back' : 'front'">
+                            A propos de moi
+                        </button>
+
+
+
+
+                            <div class="mt-6 font-medium">{{user.first_name}} {{user.name_user}}</div>
+
+                            <div class="mt-4 h-28">
+                                {{user.description}} </div>
+                            <hr class="w-full border-t my-6">
+                            <div class="flex items-center">
+                                <mat-icon
+                                    class="icon-size-5 mr-3"
+                                    [svgIcon]="'heroicons_solid:location-marker'"></mat-icon>
+                                <span class="leading-none">{{user.pays}}</span>
+                            </div>
+                            <div class="flex items-center mt-4">
+                                <mat-icon
+                                    class="icon-size-5 mr-3"
+                                    [svgIcon]="'heroicons_solid:briefcase'"></mat-icon>
+                                <span class="leading-none">{{userData.title}}</span>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                </ng-container>
+                <ng-container fuseCardBack >
+                    <div class="flex flex-col h-200 items-center bg-card shadow rounded-xl overflow-hidden">
+                        <div class="flex flex-col h-auto w-full p-8 text-center">
+
+                        <button
+                            class="ml-1.5"
+                            mat-icon-button
+                            (click)="flippableCard01.face = flippableCard01.face === 'front' ? 'back' : 'front'">
+                            <mat-icon [svgIcon]="'heroicons_outline:arrow-narrow-left'"></mat-icon>
+                        </button>
+
+
+
+                            <div class="w-10 h-10 mx-auto rounded-full overflow-hidden">
+                                <ng-container *ngIf="user.picture">
+                                    <img
+                                        class="object-cover w-full h-full"
+                                        [src]="sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'+ user.picture )"
+                                        alt=""/>
+                                </ng-container>
+                                <ng-container *ngIf="!user.picture">
+                                    <div class="flex items-center justify-center w-full h-full rounded-full text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                                        {{user.first_name.charAt(0)}}
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <div class="mt-6 font-medium">{{user.first_name}} {{user.name_user}}</div>
+
+                            <hr class="w-full border-t my-6">
+                            <div class="flex items-center">
+                                <mat-icon
+                                    class="icon-size-5 mr-3"
+                                    [svgIcon]="'heroicons_solid:location-marker'"></mat-icon>
+                                <span class="leading-none">{{user.pays}}</span>
+                            </div>
+                            <div class="flex items-center mt-4">
+                                <mat-icon
+                                    class="icon-size-5 mr-3"
+                                    [svgIcon]="'heroicons_solid:briefcase'"></mat-icon>
+                                <span class="leading-none">{{userData.title}}</span>
+                            </div>
+                            <div class="flex items-center mt-4">
+                                <mat-icon
+                                    class="icon-size-5 mr-3"
+                                    [svgIcon]="'heroicons_solid:cake'"></mat-icon>
+                                <span class="leading-none">{{userData.date_birth|date:'dd-MM-yyyy'}}</span>
+                            </div>
+                            <div class="flex items-center mt-4">
+                                <mat-icon
+                                    class="icon-size-5 mr-3"
+                                    [svgIcon]="'heroicons_solid:mail'"></mat-icon>
+                                <span class="leading-none">{{userData.email}}</span>
+                            </div>  <div class="flex items-center mt-4">
+                            <mat-icon
+                                class="icon-size-5 mr-3"
+                                [svgIcon]="'heroicons_solid:phone'"></mat-icon>
+                            <span class="leading-none">{{userData.phone}}</span>
+                        </div>  <div class="flex items-center mt-4">
+                            <mat-icon
+                                class="icon-size-5 mr-3"
+                                [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                            <span class="leading-none">{{userData.gender}}</span>
+                        </div>  <div class="flex items-center mt-4">
+                            <mat-icon
+                                class="icon-size-5 mr-3"
+                                [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                            <span class="leading-none">{{userData.age}}</span>
+                        </div>
+
+                        </div>
+
+                    </div>
+                </ng-container>
+
+            </fuse-card>
+            <!-- Groups -->
+
+            <fuse-card class="flex flex-col max-w-80 w-full mt-8 px-8 pt-6 pb-4">
+                <div class="flex items-center justify-between">
+                    <div class="text-2xl font-semibold leading-tight">Publications</div>
+
+                </div>
+                <div class="flex flex-col mt-5" *ngFor="let p of pubL">
+                    <div class="flex items-center">
+                        <ng-container *ngIf="p.users.picture">
+
+                            <img
+                                class="w-14 h-14 mr-4 rounded object-cover"
+                                [src]="sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'+ p.users.picture)"
+                                alt="Card cover image">
+                        </ng-container>
+                        <ng-container *ngIf="!p.users.picture">
+                            <div class="flex items-center justify-center w-12 min-w-12 h-12 rounded-full mr-4text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                                {{p.users.first_name.charAt(0)}}
+                            </div>
+                        </ng-container>
+                        <div class="flex flex-col min-w-0">
+                            <div class="font-medium leading-none">{{p.users.first_name}} {{p.users.name_user}}</div>
+                            <div class="text-md truncate leading-none mt-1">{{p.status}}</div>
+                            <div class="text-md leading-none text-secondary mt-2">Ajoutée  le :{{p.start_date|date:'dd-MM-yyyy'}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center mt-6 -mx-3">
+                    <button
+                        class="px-3"
+                        mat-button
+                        [color]="'primary'"
+                        [routerLink]="['/apps/acceuil']">
+                        Voir tous les demandes
+                    </button>
+                </div>
+            </fuse-card>
+            <!-- Gallery -->
+            <fuse-card class="flex flex-col max-w-80 w-full mt-8 px-8 pt-6 pb-4">
+                <div class="flex items-center justify-between">
+                    <div class="text-2xl font-semibold leading-tight">Gallery</div>
+
+                </div>
+                <div class="flex " >
+                    <div class="flex flex-row justify-between mt-10" *ngFor="let i of pubL" >
+                        <img *ngIf="i.image"
+                             class="w-14 h-14 rounded object-cover"
+                             [src]="sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'+ i.image )"
+                             alt="Card cover image"/>
+
+                    </div>
+
+                </div>
+
+            </fuse-card>
+
+            <!-- Abonnées -->
+            <fuse-card class="flex flex-col max-w-80 w-full mt-8 px-8 pt-6 pb-4">
+                <div class="flex items-center justify-between">
+                    <div class="text-2xl font-semibold leading-tight">Abonnées</div>
+                    <a
+                        class="order-first sm:order-last" style= "color:blue;" href="listes des abonnées"
+                        [routerLink]="['/apps/profil/abonnee']">
+                        Tous les abonnées
+                    </a>
+                </div>
+                <div>
+                    <div class="ml-0.5 font-medium text-secondary"> {{abonnee}} Abonnées</div>
+
+                </div>
+
+                <!-- Project selector -->
+
+                <mat-spinner class="wrapper" style="margin:0 auto;"
+                             mode="indeterminate" *ngIf="load">    </mat-spinner>
+
+                <div class="flex " >
+                    <div class="grid sm:grid-cols-1 sm:grid-cols-2 sm:grid-cols-3  gap-6 w-full min-w-0">
+
+                        <fuse-card *ngFor="let member of listuser"
+
+                                   [flippable]="true"
+                                   [face]="'front'"
+                                   #flippableCard01="fuseCard">
+                            <ng-container fuseCardFront >
+                                <!-- Avatar & Info -->
+
+
+
+                                <div class="flex flex-row justify-between mt-10 ">
+                                    <ng-container *ngIf="member.picture">
+                                        <img
+                                            class="w-14 h-14  object-cover"
+                                            [src]="sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'+ member.picture )"
+                                            alt="Card cover image"/>
+                                    </ng-container>
+                                    <ng-container *ngIf="!member.picture">
+                                        <div class="flex items-center    sm:text-center uppercase  ">
+                                            {{member.first_name.charAt(0)}}
+                                        </div>
+                                    </ng-container>
+                                </div>
+                                <div class="flex flex-col">
+                                    <button class="font-semibold leading-none" (click)="profilDetails(member.id)">
+                                        {{member.first_name}} {{member.name_user}}</button>
+                                </div>
+
+
+                            </ng-container>
+                        </fuse-card>
+                    </div></div>
+        </fuse-card>
+    </div>
+
+
+
+        <!-- Column -->
+        <div class="flex flex-col items-start">
+            <!-- Create Post -->
+            <fuse-card class="flex flex-col max-w-140 w-full p-6 sm:p-8 pb-6">
+                <div class="text-xl font-semibold">Créer une publication</div>
+                <br>
+                <div> <button
+                              class="px-3 mr-1 hidden sm:inline-flex"
+                              mat-button
+                              (click)="openComposeDialog()">
+                    <mat-icon
+                        class="icon-size-5 mr-2"
+                        [svgIcon]="'heroicons_solid:briefcase'"></mat-icon>
+                    <span>Demande de prestation</span>
+                </button></div>
+            </fuse-card>
+
+            <!-- Post 1 -->
+
+            <ng-container *ngFor="let p of MesdemL">
+
+                <fuse-card
+                    class="flex flex-col max-w-140 w-full mt-8"
+                    #expandableCard02="fuseCard">
+                    <div class="flex items-center mx-6 sm:mx-8 mt-6 mb-4">
+                        <ng-container *ngIf="user.picture">
+                            <img
+                                class="w-10 h-10 rounded-full mr-4"
+                                [src]="sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'+ user.picture )"
+                                alt="Card cover image"/>
+                        </ng-container>
+                        <ng-container *ngIf="!user.picture">
+                            <div class="flex items-center justify-center w-12 min-w-12 h-12 rounded-full mr-4text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                                {{userData.first_name.charAt(0)}}
+                            </div>
+                        </ng-container>
+                        <div class="flex flex-col">
+                            <span class="font-semibold leading-none">{{userData.first_name}}</span>
+                            <span class="text-sm text-secondary leading-none mt-1">{{p.start_date |date:'dd-MM-yyyy' }}</span>
+                        </div>
+
+                        <button
+                            class="ml-auto -mr-4"
+                            mat-icon-button
+                            (click)="consulter(p.id)"
+                            >
+                            <mat-icon
+                                class="icon-size-5"
+                                [svgIcon]="'heroicons_solid:eye'"></mat-icon>
+                        </button>
+                    </div>
+                    <h2 class=" sm:mx-8 mb-6 text-lg font-bold leading-none">
+                        {{p.title}}
+                    </h2>
+                    <div class=" sm:mx-8 mt-2 ">
+                        {{p.description}}
+                    </div>
+                    <a class="mx-6 sm:mx-8 mt-2 mb-6">
+                        {{p.link}}
+                    </a>
+                    <div class="mx-6  sm:mx-8 text-md truncate leading-none mt-1">
+                        De {{p.start_date|date:'dd-MM-yyyy'}} à {{p.closing_date|date:'dd-MM-yyyy'}}
+                    </div>
+                    <br>
+
+
+
+
+                    <hr class="border-b mx-6 sm:mx-8 mt-4 mb-6">
+                    <div class="mx-6  sm:mx-8 text-md truncate leading-none mt-1" *ngFor="let c coun">
+                         {{competanceF.length}} candidats
+                    </div>
+                </fuse-card>
+
+            </ng-container>
+            <div class="flex flex-col max-w-140 w-full mt-8" >
+
+                <button
+                    class="px-3"
+                    mat-button
+                    [color]="'primary'"
+                    (click)="show()">
+                    Plus de publications
+
+                </button>
+                <!--Scroll to top-->
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- demande -->
+    <div class="modal fade" id="dem" tabindex="-1" role="dialog" aria-labelledby="demTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+                    <h5 class="modal-title" id="demTitle">créer une publication
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <br>
+                <br>
+                <div class="col-span-12">
+                    <div class="flex flex-col gt-xs:flex-row">
+                        <mat-form-field class="flex-auto gt-xs:pr-3">
+                            <input
+                                matInput
+                                [placeholder]="'Titre'"
+                                id="Titre" class="input" type="text" placeholder=" " [(ngModel)]="dem.title"/>
+
+                        </mat-form-field>
+
+                    </div>
+                    <div class="flex flex-col gt-xs:flex-row">
+                        <mat-form-field class="flex-auto gt-xs:pr-3">
+                            <input
+                                matInput
+                                [placeholder]="'Description'"
+                                id="Description" class="input" type="text" placeholder=" " [(ngModel)]="dem.description"/>
+
+                        </mat-form-field>
+
+                    </div>
+                    <div class="flex flex-col gt-xs:flex-row">
+                        <mat-form-field class="flex-auto gt-xs:pr-3">
+                            <input
+                                matInput
+                                [placeholder]="'Link'"
+                                id="link" class="input" type="text" placeholder=" " [(ngModel)]="dem.link" />
+
+                        </mat-form-field>
+
+                    </div>
+                    <div class="flex flex-col gt-xs:flex-row">
+                        <mat-form-field class="flex-auto gt-xs:pr-3">
+                            <input
+                                matInput
+                                [placeholder]="'Duration'"
+                                id="Duration" class="input" type="text" placeholder=" " [(ngModel)]="dem.duration"/>
+
+                        </mat-form-field>
+
+                    </div>
+                    <div class="example-container">
+
+                        <mat-form-field class="flex-auto gt-xs:pr-3">
+                            <input
+                                matInput
+                                [matDatepicker]="birthdayDatepicker1"
+                                [(ngModel)]="dem.start_date"
+                                [placeholder]="'Date debut'"
+                            >
+                            <mat-datepicker-toggle
+                                matSuffix
+                                [for]="birthdayDatepicker1">
+                            </mat-datepicker-toggle>
+                            <style>
+                                .mat-datepicker-calendar-pane {
+                                    z-index: 1200;
+                                }
+                            </style>
+                            <mat-datepicker #birthdayDatepicker1 class="mat-datepicker-calendar-pane" ></mat-datepicker>
+
+                        </mat-form-field>
+
+                    </div>
+                    <div class="flex flex-col gt-xs:flex-row">
+                        <mat-form-field class="flex-auto gt-xs:pr-3">
+                            <input
+                                matInput
+                                [matDatepicker]="birthdayDatepicker"
+                                [(ngModel)]="dem.closing_date"
+                                [placeholder]="'Date fin'"
+                            >
+                            <mat-datepicker-toggle
+                                matSuffix
+                                [for]="birthdayDatepicker">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #birthdayDatepicker></mat-datepicker>
+
+
+                        </mat-form-field>
+
+                    </div>
+                </div>
+                <br>
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-4 sm:mt-6">
+                    <div class="flex items-center mt-4 sm:mt-0">
+                    </div>
+                    <div class="flex items-center mt-4 sm:mt-0">
+                        <button
+                            class="order-first sm:order-last"
+                            mat-flat-button
+                            [color]="'primary'"
+
+                            data-dismiss="modal"
+                        >
+                            Publier
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <buttonn class="fixed flex items-center justify-center right-0 w-10 h-10 shadow-lg rounded-l-lg z-999 cursor-pointer bg-red-600 bg-opacity-90 print:hidden"
+
+                 *ngIf="isShow" (click)="gotoTop()"><mat-icon
+            class="icon-size-5 mr-2"
+            [svgIcon]="'heroicons_solid:chevron-double-up'" ></mat-icon></buttonn>
+    </div>
+
+</div>
+
+

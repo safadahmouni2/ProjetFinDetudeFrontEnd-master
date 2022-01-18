@@ -1,0 +1,116 @@
+<div
+    class="flex flex-col flex-auto min-w-0"
+    cdkScrollable>
+
+    <!-- Main -->
+    <div class="inline-block p-6 sm:p-10 text-left print:p-0">
+
+        <!-- Invoice -->
+        <div class="w-240 min-w-240 p-16 rounded-2xl shadow bg-card print:w-auto print:p-0 print:rounded-none print:shadow-none print:bg-transparent">
+
+            <div class="flex items-start">
+                    <div class="grid auto-cols-max grid-flow-col gap-x-8">
+                        <div class="place-self-center w-24">
+                            <img
+                                class="w-24"
+                                 src="../../../../../assets/images/149071.png"
+                                                                       height="225" width="225"/>
+                        </div>
+                        <div class="pl-10 border-l text-md">
+                            <div class="text-4xl">{{cv.name}}</div>
+                            <div>{{cv.mail}}</div>
+                            <div>{{cv.phone}}</div>
+
+                        </div>
+
+                </div>
+                <div class="grid grid-cols-2 gap-x-4 gap-y-1 ml-auto">
+                    <div class="justify-self-end text-4xl tracking-tight text-secondary">NUMÉRO :</div>
+                    <div class="text-4xl">{{cv.id}}</div>
+                    <div class="justify-self-end font-medium tracking-tight text-secondary">CRÉER LE :</div>
+                    <div class="font-medium">{{cv.date|date:'dd-MM-yyyy'}}</div>
+
+                </div>
+            </div>
+
+            <div class="grid grid-cols-12 gap-x-1 mt-16">
+
+
+                <div class="col-span-12 my-4 border-b"></div>
+                <!-- postes -->
+                <div class="col-span-12">
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header [collapsedHeight]="'56px'">
+                            <mat-panel-title class="font-medium leading-tight">POSTE</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div *ngFor="let faq of cv.poste">
+                            <span class="text-4xl">.</span>{{faq.name}}
+                        </div>
+                    </mat-expansion-panel>
+                </div>
+                <div class="col-span-12 my-4 border-b"></div>
+                <!-- Langues -->
+                <div class="col-span-12">
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header [collapsedHeight]="'56px'">
+                            <mat-panel-title class="font-medium leading-tight">LANGUE</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div *ngFor="let faq of cv.languages">
+                            <span class="text-4xl">.</span>{{faq.lang_name}}
+                        </div>
+                    </mat-expansion-panel>
+                </div>
+                <div class="col-span-12 my-4 border-b"></div>
+                <!-- ecoles -->
+                <div class="col-span-12">
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header [collapsedHeight]="'56px'">
+                            <mat-panel-title class="font-medium leading-tight">ECOLES</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div *ngFor="let faq of cv.ecole">
+                            <span class="text-4xl">.</span>  {{faq.name}}
+                        </div>
+                    </mat-expansion-panel>
+                </div>
+                <div class="col-span-12 my-4 border-b"></div>
+                <!-- experiances -->
+                <div class="col-span-12">
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header [collapsedHeight]="'56px'">
+                            <mat-panel-title class="font-medium leading-tight">EXPERIENCES</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div *ngFor="let faq of cv.experiences">
+                            <span class="text-4xl">.</span>{{faq.title}}
+                        </div>
+                    </mat-expansion-panel>
+                </div>
+                <div class="col-span-12 my-4 border-b"></div>
+                <!-- Competances -->
+                <div class="col-span-12">
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header [collapsedHeight]="'56px'">
+                                <mat-panel-title class="font-medium leading-tight">COMPETANCES</mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <div *ngFor="let faq of cv.skills">
+                                <span class="text-4xl">.</span>{{faq.name}}
+                            </div>
+                        </mat-expansion-panel>
+                </div>
+
+
+
+            </div>
+            <br>
+            <br>
+            <div class="mt-4 sm:mt-0">
+                <button mat-flat-button="" (click)="retour()" class="mat-focus-indicator mat-flat-button mat-button-base mat-primary" ng-reflect-color="success"><span class="mat-button-wrapper">
+                    <mat-icon
+                        class="icon-size-5"
+                        matPrefix
+                        [svgIcon]="'heroicons_solid:arrow-sm-left'"></mat-icon><span class="ml-2 mr-1">retour</span></span>
+                            </button></div>
+        </div>
+
+    </div>
+
+</div>

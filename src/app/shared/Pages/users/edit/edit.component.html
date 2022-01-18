@@ -1,0 +1,285 @@
+<div class="flex flex-col flex-auto min-w-0">
+    <!-- Header -->
+    <div class="dark bg-card dark:border-b">
+        <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
+            <div class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 my-8 sm:my-12">
+                <!-- Avatar and name -->
+                <div class="flex flex-auto items-center min-w-0">
+                    <div class="flex flex-col min-w-0 ml-4">
+                        <div class="flex items-center">
+                            <div class="mt-1 text-4xl sm:text-7xl font-extrabold tracking-tight leading-tight text-center">
+                                Gestion comptes
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Actions -->
+                <div class="flex items-center mt-6 sm:mt-0 sm:ml-2 space-x-3">
+                    <button
+                        class="fuse-mat-button-rounded bg-accent-600"
+                        mat-flat-button
+                        [color]="'accent'"
+                        [routerLink]="'/admin'">
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:library'"></mat-icon>
+                        <span class="ml-2">Administration</span>
+                    </button>
+                    <button
+                        class="fuse-mat-button-rounded"
+                        mat-flat-button
+                        [color]="'primary'"
+                        [routerLink]="'/admin/Users/liste'">
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:arrow-left'"></mat-icon>
+                        <span class="ml-2">Retour</span>
+                    </button>
+                </div>
+            </div>
+            <!-- add -->
+        </div>
+
+
+    </div>
+    <div class="flex flex-col flex-auto min-w-0">
+
+        <!-- Header -->
+        <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+            <div class="flex-1 min-w-0">
+                <!-- Breadcrumbs -->
+                <div class="flex flex-wrap items-center font-medium">
+                    <div>
+                        <a class="whitespace-nowrap text-primary-500">Compte</a>
+                    </div>
+                    <div class="flex items-center ml-1 whitespace-nowrap">
+                        <mat-icon
+                            class="icon-size-5 text-secondary"
+                            [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                        <a class="ml-1 text-primary-500">Forms</a>
+                    </div>
+                </div>
+                <!-- Title -->
+                <div class="mt-2">
+                    <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                        Compte
+                    </h2>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Main -->
+
+
+    </div>
+    <div class="flex-auto p-6 sm:p-10">
+
+        <div class="max-w-3xl">
+
+            <!--picture-->
+            <br>
+            <br>
+            <div class="flex flex-auto items-end -mt-16">
+                <div class="relative flex items-center justify-center w-32 h-32 rounded-full overflow-hidden ring-4 ring-bg-card">
+                    <!-- Upload / Remove avatar -->
+                    <div class="absolute inset-0 bg-black bg-opacity-50 z-10"></div>
+                    <div class="absolute inset-0 flex items-center justify-center z-20">
+                        <div>
+                            <input
+                                id="avatar-file-input"
+                                class="absolute h-0 w-0 opacity-0 invisible pointer-events-none"
+                                type="file"
+                                [(ngModel)]="userM.picture"
+                                [multiple]="false"
+                                [accept]="'image/jpeg, image/png'"
+                                (change)="uploadAvatar(avatarFileInput.files)"
+                                #avatarFileInput>
+                            <label
+                                class="flex items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:bg-hover"
+                                for="avatar-file-input"
+                                matRipple>
+                                <mat-icon
+                                    class="text-white"
+                                    [svgIcon]="'heroicons_outline:camera'"></mat-icon>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--name-->
+            <mat-divider class="mt-6 mb-10"></mat-divider>
+            <div class="flex flex-col gt-xs:flex-row">
+                <mat-form-field class="flex-auto gt-xs:pr-3">
+                    <input
+                        matInput
+                        [placeholder]="'Nom Famille'"
+                        id="name" class="input" type="text" placeholder=" " [(ngModel)]="userM.name_user"/>
+                    <mat-icon
+                        class="icon-size-5"
+                        matPrefix
+                        [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                </mat-form-field>
+
+            </div>
+            <!--Firstname-->
+            <div class="flex flex-col gt-xs:flex-row">
+                <mat-form-field class="flex-auto gt-xs:pr-3">
+                    <input
+                        matInput
+                        [placeholder]="'Nom'"
+                        id="Firstname" class="input" type="text" placeholder=" " [(ngModel)]="userM.first_name"/>
+                    <mat-icon
+                        class="icon-size-5"
+                        matPrefix
+                        [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                </mat-form-field>
+
+            </div>
+            <!--title-->
+            <div class="flex flex-col gt-xs:flex-row">
+                <mat-form-field class="flex-auto gt-xs:pr-3">
+                    <input
+                        matInput
+                        [placeholder]="'Titre'"
+                        id="title" class="input" type="text" placeholder=" " [(ngModel)]="userM.title"/>
+                    <mat-icon
+                        class="icon-size-5"
+                        matPrefix
+                        [svgIcon]="'heroicons_solid:briefcase'"></mat-icon>
+                </mat-form-field>
+
+            </div>
+            <!--login-->
+            <div class="flex flex-col gt-xs:flex-row">
+                <mat-form-field class="flex-auto gt-xs:pr-3">
+                    <input
+                        matInput
+                        [placeholder]="'Login'"
+                        id="login" class="input" type="text" placeholder=" " [(ngModel)]="userM.login" />
+                    <mat-icon
+                        class="icon-size-5"
+                        matPrefix
+                        [svgIcon]="'heroicons_solid:login'"></mat-icon>
+                </mat-form-field>
+
+            </div>
+            <!--pwd-->
+            <div class="flex flex-col gt-xs:flex-row">
+                <mat-form-field class="flex-auto gt-xs:pr-3">
+                    <input
+                        matInput
+                        [placeholder]="'Mot de passe'"
+                        id="pwd" class="input" type="text" placeholder=" " [(ngModel)]="userM.pwd"/>
+                    <mat-icon
+                        class="icon-size-5"
+                        matPrefix
+                        [svgIcon]="'heroicons_solid:key'"></mat-icon>
+                </mat-form-field>
+
+            </div>
+            <!--gender-->
+            <div class="flex flex-col gt-xs:flex-row">
+                <mat-form-field class="flex-auto gt-xs:pr-3">
+                    <mat-select [placeholder]="'sexe'" [(ngModel)]="userM.gender">
+                        <mat-option value="Homme">Homme</mat-option>
+                        <mat-option value="Femme">Femme</mat-option>
+
+                    </mat-select>
+
+                    <mat-icon
+                        class="icon-size-5"
+                        matPrefix
+                        [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                </mat-form-field>
+
+            </div>
+            <!--dateB-->
+            <div class="flex flex-col gt-xs:flex-row">
+                <mat-form-field class="flex-auto gt-xs:pr-3">
+                    <input
+                        matInput
+                        [matDatepicker]="birthdayDatepicker"
+                        [(ngModel)]="userM.date_birth"
+                        [placeholder]="'Date de naissance'"
+                    >
+                    <mat-datepicker-toggle
+                        matSuffix
+                        [for]="birthdayDatepicker">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #birthdayDatepicker></mat-datepicker>
+
+                    <mat-icon
+                        class="icon-size-5"
+                        matPrefix
+                        [svgIcon]="'heroicons_solid:cake'"></mat-icon>
+                </mat-form-field>
+
+            </div>
+            <!--age-->
+            <div class="flex flex-col gt-xs:flex-row">
+                <mat-form-field class="flex-auto gt-xs:pr-3">
+                    <input
+                        matInput
+                        [placeholder]="'Age'"
+                        id="age" class="input" type="text" placeholder=" " [(ngModel)]="userM.age"/>
+                    <mat-icon
+                        class="icon-size-5"
+                        matPrefix
+                        [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                </mat-form-field>
+
+            </div>
+            <!--mail-->
+            <div class="flex flex-col gt-xs:flex-row">
+                <mat-form-field class="flex-auto">
+                    <input
+                        matInput
+                        [placeholder]="'Addresse mail'"
+                        id="mail" class="input" type="text" placeholder=" " [(ngModel)]="userM.email" />
+                    <mat-icon
+                        class="icon-size-5"
+                        matPrefix
+                        [svgIcon]="'heroicons_solid:mail'"></mat-icon>
+                </mat-form-field>
+            </div>
+            <!--phone-->
+            <div class="flex flex-col gt-xs:flex-row">
+                <mat-form-field class="flex-auto">
+                    <input
+                        matInput
+                        [placeholder]="'N° télèphone'"
+                        id="phone" class="input" type="text" placeholder=" " [(ngModel)]="userM.phone" />
+                    <mat-icon
+                        class="icon-size-5"
+                        matPrefix
+                        [svgIcon]="'heroicons_solid:phone'"></mat-icon>
+                </mat-form-field>
+            </div>
+
+
+
+
+            <div class="flex items-center justify-end border-t -mx-8 mt-8 px-8 py-5 bg-gray-50 dark:bg-gray-700">
+
+                <button mat-button [color]="'accent'" [routerLink]="'/admin/Users/liste'">
+                    Cancel
+                </button>
+                <button
+                    class="px-6 ml-3"
+                    mat-flat-button
+                    [color]="'primary'"
+                    (click)="editCV()">
+
+                    Save
+                </button>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
+

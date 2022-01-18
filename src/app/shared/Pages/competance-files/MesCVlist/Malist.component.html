@@ -1,0 +1,147 @@
+<div
+    class="flex flex-col flex-auto min-w-0"
+    >
+    <div class="flex flex-col flex-auto min-w-0">
+
+        <!-- Header -->
+        <div class="dark bg-card dark:border-b">
+            <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
+                <div class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 my-8 sm:my-12">
+                    <!-- Avatar and name -->
+                    <div class="flex flex-auto items-center min-w-0">
+                        <div class="flex flex-col min-w-0 ml-4">
+                            <div class="flex items-center">
+                                <div class="mt-1 text-4xl sm:text-7xl font-extrabold tracking-tight leading-tight text-center">
+                                    Les dossiers de compétences
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Actions -->
+                    <div class="flex items-center mt-6 sm:mt-0 sm:ml-2 space-x-3">
+
+                        <button
+                            class="fuse-mat-button-rounded"
+                            mat-flat-button
+                            [color]="'primary'"
+                            [routerLink]="'/apps/CompetencesFiles/ajouter'">
+                            <mat-icon
+                                class="icon-size-5"
+                                [svgIcon]="'heroicons_solid:plus-sm'"></mat-icon>
+                            <span class="ml-2">Ajouter</span>
+                        </button>
+                        <button mat-flat-button="" (click)="retour()" class="mat-focus-indicator mat-flat-button mat-button-base mat-primary" ng-reflect-color="success"><span class="mat-button-wrapper">
+                    <mat-icon
+                        class="icon-size-5"
+                        matPrefix
+                        [svgIcon]="'heroicons_solid:arrow-sm-left'"></mat-icon><span class="ml-2 mr-1">retour</span></span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Project selector -->
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex flex-col flex-auto items-center p-6 sm:p-10">
+
+        <!-- Title -->
+
+
+        <!-- Boards -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-8 md:mt-16">
+            <ng-container *ngFor="let board of competanceF">
+            <fuse-card class="flex flex-col max-w-140 w-full mt-8">
+                <div class="flex items-center mx-6 sm:mx-8 mt-6 mb-1">
+
+
+                    <div class="flex flex-col">
+                        <a (click)="ondetaille(board.id)" class="font-semibold leading-none">{{board.name}}</a>
+                        <a (click)="ondetaille(board.id)" class="text-sm text-secondary leading-none mt-1">{{board.date|date:'dd-MM-yyyy'}}</a>
+
+
+                    </div>
+                    <button
+                        class="ml-auto -mr-4"
+                        mat-icon-button
+                        [matMenuTriggerFor]="postCardMenu08">
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
+                    </button>
+                    <mat-menu #postCardMenu08="matMenu"    >
+                        <button mat-menu-item
+                                (click)="update(board.id)">
+                            <span class="flex items-center">
+                                <mat-icon
+                                    class="icon-size-5 mr-3"
+                                    [svgIcon]="'heroicons_outline:x-circle'"></mat-icon>
+                                <span>modifier</span>
+                            </span>
+                        </button>
+                        <!-- Modal -->
+                        <button mat-menu-item (click)="onDelete(board.id)">
+                            <span class="flex items-center">
+                                <mat-icon
+                                    class="icon-size-5 mr-3"
+                                    [svgIcon]="'heroicons_outline:check-circle'"></mat-icon>
+                                <span>Supprimer</span>
+                            </span>
+                        </button>
+
+                    </mat-menu>
+                </div>
+                <hr class="border-b mx-6 sm:mx-8 mt-4 mb-6">
+                <button mat-menu-item (click)="ondetaille(board.id)">
+                            <span class="flex items-center">
+                                <mat-icon
+                                    class="icon-size-5 mr-3"
+                                    [svgIcon]="'heroicons_outline:eye'"></mat-icon>
+                                <span>détails</span>
+                            </span>
+                </button>
+            </fuse-card>
+
+            </ng-container>
+
+            <!-- New board -->
+            <a [routerLink]="'/apps/CompetencesFiles/ajouter'"
+           class="flex flex-col items-center justify-center w-56 rounded-lg cursor-pointer border-2 border-gray-300 border-dashed hover:bg-hover transition-colors duration-150 ease-in-out">
+
+                <mat-icon
+                    class="icon-size-12 text-hint"
+                    [svgIcon]="'heroicons_outline:plus'"
+                    ></mat-icon>
+
+
+            </a>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h1>Supprimer le compte</h1>
+                    <p>Êtes-vous sûr de vouloir supprimer votre compte ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-danger"(click)="onDelete(IDDelete)" data-dismiss="modal">Supprimer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,1142 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <!-- Main -->
+    <div class="flex flex-auto justify-center w-full max-w-5xl mx-auto p-6 sm:p-8">
+
+        <!-- Column -->
+        <div class=" lg:flex flex-col items-start mr-8">
+
+            <!-- About me -->
+            <fuse-card class="flex flex-col max-w-80 w-full p-8"
+                       [flippable]="true"
+                       [face]="'front'"
+                       #flippableCard01="fuseCard">
+              <ng-container fuseCardFront >
+                  <div class="flex flex-col flex-auto items-center bg-card shadow rounded-xl overflow-hidden">
+                  <button
+                          class="px-3"
+                          mat-button
+                          [color]="'primary'"
+                          (click)="flippableCard01.face = flippableCard01.face === 'front' ? 'back' : 'front'">
+                      A propos de moi
+                      </button>
+
+                      <div class="flex flex-col flex-auto w-full p-8 text-center">
+
+
+                          <div class="w-32 h-32 mx-auto rounded-full overflow-hidden">
+                              <ng-container *ngIf="user.picture">
+                                  <img
+                                      class="object-cover w-full h-full"
+                                      [src]="sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'+ user.picture )"
+                                      alt=""/>
+                              </ng-container>
+                              <ng-container *ngIf="!user.picture">
+                                  <div class="flex items-center justify-center w-full h-full rounded-full text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                                      {{user.first_name.charAt(0)}}
+                                  </div>
+                              </ng-container>
+                          </div>
+                          <div class="mt-6 font-medium">{{user.first_name}} {{user.name_user}}</div>
+
+                          <div class="mt-4">
+                              {{user.description}} </div>
+                          <hr class="w-full border-t my-6">
+                          <div class="flex items-center">
+                              <mat-icon
+                                  class="icon-size-5 mr-3"
+                                  [svgIcon]="'heroicons_solid:location-marker'"></mat-icon>
+                              <span class="leading-none">{{user.pays}}</span>
+                          </div>
+                          <div class="flex items-center mt-4">
+                              <mat-icon
+                                  class="icon-size-5 mr-3"
+                                  [svgIcon]="'heroicons_solid:briefcase'"></mat-icon>
+                              <span class="leading-none">{{userData.title}}</span>
+                          </div>
+
+
+
+                      </div>
+
+                  </div>
+              </ng-container>
+                <ng-container fuseCardBack >
+                    <div class="flex flex-col flex-auto items-center bg-card shadow rounded-xl overflow-hidden">
+                        <button
+                            class="ml-1.5"
+                            mat-icon-button
+                            (click)="flippableCard01.face = flippableCard01.face === 'front' ? 'back' : 'front'">
+                            <mat-icon [svgIcon]="'heroicons_outline:arrow-narrow-left'"></mat-icon>
+                        </button>
+
+                        <div class="flex flex-col flex-auto w-full p-8 text-center">
+
+
+                            <div class="w-10 h-10 mx-auto rounded-full overflow-hidden">
+                                <ng-container *ngIf="user.picture">
+                                    <img
+                                        class="object-cover w-full h-full"
+                                        [src]="sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'+ user.picture )"
+                                        alt=""/>
+                                </ng-container>
+                                <ng-container *ngIf="!user.picture">
+                                    <div class="flex items-center justify-center w-full h-full rounded-full text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                                        {{user.first_name.charAt(0)}}
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <div class="mt-6 font-medium">{{user.first_name}} {{user.name_user}}</div>
+                            <div class="mt-4">
+                                {{user.description}} </div>
+                            <hr class="w-full border-t my-6">
+                            <div class="flex items-center">
+                                <mat-icon
+                                    class="icon-size-5 mr-3"
+                                    [svgIcon]="'heroicons_solid:location-marker'"></mat-icon>
+                                <span class="leading-none">{{user.pays}}</span>
+                            </div>
+                            <div class="flex items-center mt-4">
+                                <mat-icon
+                                    class="icon-size-5 mr-3"
+                                    [svgIcon]="'heroicons_solid:briefcase'"></mat-icon>
+                                <span class="leading-none">{{userData.title}}</span>
+                            </div>
+                            <div class="flex items-center mt-4">
+                                <mat-icon
+                                    class="icon-size-5 mr-3"
+                                    [svgIcon]="'heroicons_solid:cake'"></mat-icon>
+                                <span class="leading-none">{{userData.date_birth|date:'dd-MM-yyyy'}}</span>
+                            </div>
+                            <div class="flex items-center mt-4">
+                                <mat-icon
+                                    class="icon-size-5 mr-3"
+                                    [svgIcon]="'heroicons_solid:mail'"></mat-icon>
+                                <span class="leading-none">{{userData.email}}</span>
+                            </div>  <div class="flex items-center mt-4">
+                            <mat-icon
+                                class="icon-size-5 mr-3"
+                                [svgIcon]="'heroicons_solid:phone'"></mat-icon>
+                            <span class="leading-none">{{userData.phone}}</span>
+                        </div>  <div class="flex items-center mt-4">
+                            <mat-icon
+                                class="icon-size-5 mr-3"
+                                [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                            <span class="leading-none">{{userData.gender}}</span>
+                        </div>  <div class="flex items-center mt-4">
+                            <mat-icon
+                                class="icon-size-5 mr-3"
+                                [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                            <span class="leading-none">{{userData.age}}</span>
+                        </div>
+
+                        </div>
+
+                    </div>
+                </ng-container>
+
+            </fuse-card>
+
+            <!-- Groups -->
+
+            <fuse-card class="flex flex-col max-w-80 w-full mt-8 px-8 pt-6 pb-4">
+                <div class="flex items-center justify-between">
+                    <div class="text-2xl font-semibold leading-tight">Demandes de prestation</div>
+
+                </div>
+                <div class="flex flex-col mt-5" *ngFor="let p of demL">
+                    <div class="flex items-center">
+                        <ng-container *ngIf="p.user.picture">
+
+                            <img
+                                class="w-14 h-14 mr-4 rounded object-cover"
+                                [src]="sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'+ p.user.picture)"
+                                alt="Card cover image">
+                        </ng-container>
+                        <ng-container *ngIf="!p.user.picture">
+                            <div class="flex items-center justify-center w-12 min-w-12 h-12 rounded-full mr-4text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                                {{p.user.first_name.charAt(0)}}
+                            </div>
+                        </ng-container>
+                        <div class="flex flex-col min-w-0">
+                            <div class="font-medium leading-none">{{p.user.first_name}} {{p.user.name_user}}</div>
+                            <div class="text-md truncate leading-none mt-1">{{p.title}}</div>
+                            <div class="text-md leading-none text-secondary mt-2">ferme le : {{p.closing_date|date:'dd-MM-yyyy'}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center mt-6 -mx-3">
+                    <button
+                        class="px-3"
+                        mat-button
+                        [color]="'primary'"
+                        [routerLink]="['/apps/offre']">
+                        Voir tous les demandes
+                    </button>
+                </div>
+            </fuse-card>
+            <!-- Followers -->
+            <!--  <fuse-card class="flex flex-col max-w-80 w-full mt-8 px-8 pt-6 pb-4">
+                 <div class="flex items-center justify-between">
+                     <div class="text-2xl font-semibold leading-tight">Followers</div>
+                     <div class="-mr-3">
+                         <button
+                             mat-icon-button
+                             [matMenuTriggerFor]="listCard08Menu">
+                             <mat-icon
+                                 class="icon-size-5"
+                                 [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
+                         </button>
+                         <mat-menu #listCard08Menu="matMenu">
+                             <button mat-menu-item>Find friends</button>
+                         </mat-menu>
+                     </div>
+                 </div>
+                 <div class="flex flex-col">
+                     <div class="flex justify-between mt-6">
+                         <img
+                             class="w-14 h-14 rounded-full"
+                             src="assets/images/avatars/female-01.jpg"
+                             alt="Card cover image">
+                         <img
+                             class="w-14 h-14 rounded-full"
+                             src="assets/images/avatars/male-01.jpg"
+                             alt="Card cover image">
+                         <img
+                             class="w-14 h-14 rounded-full"
+                             src="assets/images/avatars/male-02.jpg"
+                             alt="Card cover image">
+                         <img
+                             class="w-14 h-14 rounded-full"
+                             src="assets/images/avatars/female-02.jpg"
+                             alt="Card cover image">
+                     </div>
+                     <div class="flex justify-between mt-3">
+                         <img
+                             class="w-14 h-14 rounded-full"
+                             src="assets/images/avatars/female-03.jpg"
+                             alt="Card cover image">
+                         <img
+                             class="w-14 h-14 rounded-full"
+                             src="assets/images/avatars/female-04.jpg"
+                             alt="Card cover image">
+                         <img
+                             class="w-14 h-14 rounded-full"
+                             src="assets/images/avatars/male-03.jpg"
+                             alt="Card cover image">
+                         <img
+                             class="w-14 h-14 rounded-full"
+                             src="assets/images/avatars/male-04.jpg"
+                             alt="Card cover image">
+                     </div>
+                     <div class="flex justify-between mt-3">
+                         <img
+                             class="w-14 h-14 rounded-full"
+                             src="assets/images/avatars/female-05.jpg"
+                             alt="Card cover image">
+                         <img
+                             class="w-14 h-14 rounded-full"
+                             src="assets/images/avatars/female-06.jpg"
+                             alt="Card cover image">
+                         <img
+                             class="w-14 h-14 rounded-full"
+                             src="assets/images/avatars/male-05.jpg"
+                             alt="Card cover image">
+                         <img
+                             class="w-14 h-14 rounded-full"
+                             src="assets/images/avatars/male-06.jpg"
+                             alt="Card cover image">
+                     </div>
+                     <div class="flex justify-between mt-3">
+                         <img
+                             class="w-14 h-14 rounded-full"
+                             src="assets/images/avatars/female-07.jpg"
+                             alt="Card cover image">
+                         <img
+                             class="w-14 h-14 rounded-full"
+                             src="assets/images/avatars/male-07.jpg"
+                             alt="Card cover image">
+                         <img
+                             class="w-14 h-14 rounded-full"
+                             src="assets/images/avatars/male-08.jpg"
+                             alt="Card cover image">
+                         <img
+                             class="w-14 h-14 rounded-full"
+                             src="assets/images/avatars/female-08.jpg"
+                             alt="Card cover image">
+                     </div>
+                 </div>
+                 <div class="flex items-center mt-6 -mx-3">
+                     <button
+                         class="px-3"
+                         mat-button
+                         [color]="'primary'"
+                         [routerLink]="['./']">
+                         See all followers
+                     </button>
+                 </div>
+             </fuse-card>-->
+
+            <!-- Gallery -->
+            <!--<fuse-card class="flex flex-col max-w-80 w-full mt-8 px-8 pt-6 pb-4">
+                <div class="flex items-center justify-between">
+                    <div class="text-2xl font-semibold leading-tight">Gallery</div>
+                    <div class="-mr-3">
+                        <button
+                            mat-icon-button
+                            [matMenuTriggerFor]="listCard09Menu">
+                            <mat-icon
+                                class="icon-size-5"
+                                [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
+                        </button>
+                        <mat-menu #listCard09Menu="matMenu">
+                            <button mat-menu-item>Add image</button>
+                            <button mat-menu-item>Add video</button>
+                        </mat-menu>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <div class="flex justify-between mt-6">
+                        <img
+                            class="w-14 h-14 rounded object-cover"
+                            src="assets/images/cards/14-640x480.jpg"
+                            alt="Card cover image">
+                        <img
+                            class="w-14 h-14 rounded object-cover"
+                            src="assets/images/cards/15-640x480.jpg"
+                            alt="Card cover image">
+                        <img
+                            class="w-14 h-14 rounded object-cover"
+                            src="assets/images/cards/16-640x480.jpg"
+                            alt="Card cover image">
+                        <img
+                            class="w-14 h-14 rounded object-cover"
+                            src="assets/images/cards/17-640x480.jpg"
+                            alt="Card cover image">
+                    </div>
+                    <div class="flex justify-between mt-3">
+                        <img
+                            class="w-14 h-14 rounded object-cover"
+                            src="assets/images/cards/18-640x480.jpg"
+                            alt="Card cover image">
+                        <img
+                            class="w-14 h-14 rounded object-cover"
+                            src="assets/images/cards/19-640x480.jpg"
+                            alt="Card cover image">
+                        <img
+                            class="w-14 h-14 rounded object-cover"
+                            src="assets/images/cards/20-640x480.jpg"
+                            alt="Card cover image">
+                        <img
+                            class="w-14 h-14 rounded object-cover"
+                            src="assets/images/cards/21-640x480.jpg"
+                            alt="Card cover image">
+                    </div>
+                    <div class="flex justify-between mt-3">
+                        <img
+                            class="w-14 h-14 rounded object-cover"
+                            src="assets/images/cards/22-640x480.jpg"
+                            alt="Card cover image">
+                        <img
+                            class="w-14 h-14 rounded object-cover"
+                            src="assets/images/cards/23-640x480.jpg"
+                            alt="Card cover image">
+                        <img
+                            class="w-14 h-14 rounded object-cover"
+                            src="assets/images/cards/24-640x480.jpg"
+                            alt="Card cover image">
+                        <img
+                            class="w-14 h-14 rounded object-cover"
+                            src="assets/images/cards/25-640x480.jpg"
+                            alt="Card cover image">
+                    </div>
+                    <div class="flex justify-between mt-3">
+                        <img
+                            class="w-14 h-14 rounded object-cover"
+                            src="assets/images/cards/26-640x480.jpg"
+                            alt="Card cover image">
+                        <img
+                            class="w-14 h-14 rounded object-cover"
+                            src="assets/images/cards/27-640x480.jpg"
+                            alt="Card cover image">
+                        <img
+                            class="w-14 h-14 rounded object-cover"
+                            src="assets/images/cards/28-640x480.jpg"
+                            alt="Card cover image">
+                        <img
+                            class="w-14 h-14 rounded object-cover"
+                            src="assets/images/cards/29-640x480.jpg"
+                            alt="Card cover image">
+                    </div>
+                </div>
+                <div class="flex items-center mt-6 -mx-3">
+                    <button
+                        class="px-3"
+                        mat-button
+                        [color]="'primary'"
+                        [routerLink]="['./']">
+                        See entire gallery
+                    </button>
+                </div>
+            </fuse-card>-->
+
+
+
+            <!-- News -->
+           <!-- <fuse-card class="flex flex-col max-w-80 w-full mt-8 px-8 pt-6 pb-4">
+                <div class="flex items-center justify-between">
+                    <div class="text-2xl font-semibold leading-tight">News</div>
+                    <div class="-mr-3">
+                        <button
+                            mat-icon-button
+                            [matMenuTriggerFor]="listCard01Menu">
+                            <mat-icon
+                                class="icon-size-5"
+                                [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
+                        </button>
+                        <mat-menu #listCard01Menu="matMenu">
+                            <button mat-menu-item>Mark all as read</button>
+                        </mat-menu>
+                    </div>
+                </div>
+                <div class="flex flex-col mt-5">
+                    <div class="flex">
+                        <mat-icon
+                            class="icon-size-5 mt-0.5 mr-2"
+                            [svgIcon]="'heroicons_solid:bell'"></mat-icon>
+                        <div><b>20% OFF</b> in your favorite hats shop on next Friday.</div>
+                    </div>
+                    <div class="flex mt-5">
+                        <mat-icon
+                            class="icon-size-5 mt-0.5 mr-2"
+                            [svgIcon]="'heroicons_solid:bell'"></mat-icon>
+                        <div>Upcoming meetups within 20 miles.
+                            <a
+                                class="text-secondary whitespace-nowrap hover:underline"
+                                [routerLink]="['./']">See details
+                            </a>
+                        </div>
+                    </div>
+                    <div class="flex mt-5">
+                        <mat-icon
+                            class="icon-size-5 mt-0.5 mr-2"
+                            [svgIcon]="'heroicons_solid:bell'"></mat-icon>
+                        <div>Concerts from your favorite bands available within 100 miles.
+                            <a
+                                class="text-secondary whitespace-nowrap hover:underline"
+                                [routerLink]="['./']">See details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center mt-4 -mx-3">
+                    <button
+                        class="px-3"
+                        mat-button
+                        [color]="'primary'"
+                        [routerLink]="['./']">
+                        See all news
+                    </button>
+                </div>
+            </fuse-card>-->
+
+            <!-- Activity Feed -->
+            <!--<fuse-card class="flex flex-col max-w-80 w-full mt-8 px-8 pt-6 pb-4">
+                <div class="flex items-center justify-between">
+                    <div class="text-2xl font-semibold leading-tight">Activity Feed</div>
+                    <div class="-mr-3">
+                        <button
+                            mat-icon-button
+                            [matMenuTriggerFor]="listCard04Menu">
+                            <mat-icon
+                                class="icon-size-5"
+                                [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
+                        </button>
+                        <mat-menu #listCard04Menu="matMenu">
+                            <button mat-menu-item>Clear activities</button>
+                        </mat-menu>
+                    </div>
+                </div>
+                <div class="flex flex-col mt-5">
+                    <div class="flex">
+                        <img
+                            class="w-10 h-10 mr-4 rounded-full"
+                            src="assets/images/avatars/female-01.jpg"
+                            alt="Card cover image">
+                        <div class="flex flex-col min-w-0">
+                            <div class="leading-tight">Amelia Edwards commented on John Silverton's photo</div>
+                            <div class="text-md leading-none text-secondary mt-2">4 minutes ago</div>
+                        </div>
+                    </div>
+                    <div class="flex mt-8">
+                        <img
+                            class="w-10 h-10 mr-4 rounded-full"
+                            src="assets/images/avatars/male-01.jpg"
+                            alt="Card cover image">
+                        <div class="flex flex-col min-w-0">
+                            <div class="leading-tight">Lew Silverton changed his profile photo</div>
+                            <div class="text-md leading-none text-secondary mt-2">25 minutes ago</div>
+                        </div>
+                    </div>
+                    <div class="flex mt-8">
+                        <img
+                            class="w-10 h-10 mr-4 rounded-full"
+                            src="assets/images/avatars/male-15.jpg"
+                            alt="Card cover image">
+                        <div class="flex flex-col min-w-0">
+                            <div class="leading-tight">Brian Hughes liked your photo</div>
+                            <div class="text-md leading-none text-secondary mt-2">3 hours ago</div>
+                        </div>
+                    </div>
+                    <div class="flex mt-8">
+                        <img
+                            class="w-10 h-10 mr-4 rounded-full"
+                            src="assets/images/avatars/female-15.jpg"
+                            alt="Card cover image">
+                        <div class="flex flex-col min-w-0">
+                            <div class="leading-tight">Marleah Eagleston commented on John Silverton's photo</div>
+                            <div class="text-md leading-none text-secondary mt-2">Yesterday</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center mt-6 -mx-3">
+                    <button
+                        class="px-3"
+                        mat-button
+                        [color]="'primary'"
+                        [routerLink]="['./']">
+                        See entire activity feed
+                    </button>
+                </div>
+            </fuse-card>-->
+
+        </div>
+
+        <!-- Column -->
+        <div class="flex flex-col items-start">
+
+            <!-- Create Post -->
+            <fuse-card class="flex flex-col max-w-140 w-full p-6 sm:p-8 pb-6">
+                <div class="text-xl font-semibold">Créer une publication</div>
+                <a class="flex flex-col sm:flex-row items-start mt-8" data-toggle="modal" data-target="#pub">
+                    <div class="flex items-center mb-6 sm:mb-0">
+                        <ng-container *ngIf="user.picture">
+                            <img
+                                class="w-20 min-w-20 h-20 rounded-full mr-4"
+                                [src]="sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'+ user.picture )"
+
+                                alt="Card cover image"/>
+                        </ng-container>
+
+                        <ng-container *ngIf="!user.picture">
+                            <div class="flex items-center justify-center w-12 min-w-12 h-12 rounded-full mr-4text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                                {{userData.first_name.charAt(0)}}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <mat-form-field class="fuse-mat-textarea fuse-mat-no-subscript w-full">
+                        <textarea
+                            matInput
+                            placeholder="Quoi de neuf , {{userData.first_name}} ?"
+                            [rows]="0"
+                            matTextareaAutosize></textarea>
+                    </mat-form-field>
+                </a>
+                <div class="flex items-center mt-16 sm:mt-8 -mx-3">
+
+                   <div> <button data-toggle="modal" data-target="#pubI"
+                        class="px-9 mr-5"
+                        mat-button
+                       >
+                        <mat-icon
+                            class="icon-size-5 mr-2"
+                            [svgIcon]="'heroicons_solid:photograph'"></mat-icon>
+                        <span>Photo </span>
+                    </button></div>
+                    <div> <button data-toggle="modal" data-target="#pubV"
+                        class="px-9 mr-5 hidden sm:inline-flex"
+                        mat-button
+                        [routerLink]="['./']">
+                        <mat-icon
+                            class="icon-size-5 mr-2"
+                            [svgIcon]="'heroicons_solid:play'"></mat-icon>
+                        <span>Video</span>
+                    </button></div>
+                    <div> <button data-toggle="modal" data-target="#pubG"
+                        class="px-9 mr-5 hidden sm:inline-flex"
+                        mat-button
+                        [routerLink]="['./']">
+                        <mat-icon
+                            class="icon-size-5 mr-2"
+                            [svgIcon]="'heroicons_solid:sparkles'"></mat-icon>
+                        <span>Gif</span>
+                    </button></div>
+                    <div> </div>
+                </div>
+            </fuse-card>
+
+            <!-- Post 1 -->
+            <mat-spinner class="wrapper" style="margin:0 auto;"
+                                        mode="indeterminate" *ngIf="load">    </mat-spinner>
+            <ng-container *ngFor="let p of pubL; let index = index;">
+
+                <fuse-card
+                    class="flex flex-col max-w-140 w-full mt-8"
+                    #expandableCard02="fuseCard">
+                    <div class="flex items-center mx-6 sm:mx-8 mt-6 mb-4">
+                        <ng-container *ngIf="p.users.picture">
+
+                        <img
+                            class="w-10 h-10 rounded-full mr-4"
+                            [src]="sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'+ p.users.picture)"
+                            alt="Card cover image">
+                        </ng-container>
+                        <ng-container *ngIf="!p.users.picture">
+                            <div class="flex items-center justify-center w-12 min-w-12 h-12 rounded-full mr-4text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                                      </div>
+                        </ng-container>
+
+                        <div class="flex flex-col">
+                            <button class="font-semibold leading-none" (click)="profilDetails(p.users.id)">{{p.users.first_name}} {{p.users.name_user}}</button>
+                            <span class="text-sm text-secondary leading-none mt-1">{{p.start_date |date:'dd-MM-yyyy' }}</span>
+                        </div>
+                        <button
+                            class="ml-auto -mr-4"
+                            mat-icon-button
+                            [matMenuTriggerFor]="postCardMenu08">
+                            <mat-icon
+                                class="icon-size-5"
+                                [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
+                        </button>
+                        <mat-menu #postCardMenu08="matMenu"    >
+                            <button mat-menu-item  data-toggle="modal" data-target="#exampleModalCenter" (click)="signaler(p.id)">
+                            <span class="flex items-center">
+                                <mat-icon
+                                    class="icon-size-5 mr-3"
+                                    [svgIcon]="'heroicons_outline:minus-circle'"></mat-icon>
+                                <span>Signaler</span>
+                            </span>
+                            </button>
+                        </mat-menu>
+                    </div>
+                        <div class="mx-6 sm:mx-8 mt-2 mb-6">
+                        {{p.status}}
+                    </div>
+                    <div class="flex mx-6 sm:mx-8 mb-4">
+                        <div class="flex h-80 pr-1" *ngIf="p.video">
+                            <video width="500" height="300" controls="controls"
+
+
+                                alt=""> <source [src]="sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'+ p.video )" type="video/mp4"></video>
+                        </div>
+                        <div class="flex h-80 pr-1" *ngIf="p.image">
+
+                        <img  controls="controls"
+                            [src]="sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'+ p.image )"
+                            alt=""/>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center mx-3 sm:mx-5">
+                        <button *ngIf="!likeFunct(p.likes,userData.id)"
+                            class="px-3 mr-1"
+                            mat-button
+                           (click)="aime(p.id,index)">
+                            <mat-icon
+                                class="icon-size-5 text-white-500 mr-2"
+                                [svgIcon]="'heroicons_solid:heart'"></mat-icon>
+                            <span>j'aime</span>
+                        </button>
+                        <button *ngIf="likeFunct(p.likes,userData.id)"
+                            class="px-3 mr-1"
+                            mat-button
+                            (click)="aimePas(p.id,index)">
+                            <mat-icon
+                                class="icon-size-5 text-red-500 mr-2"
+                                [svgIcon]="'heroicons_solid:heart'"></mat-icon>
+                            <span>j'aime</span>
+                        </button>
+                        <button
+                            class="px-3 mr-1"
+                            mat-button
+                            (click)="expandableCard02.expanded = !expandableCard02.expanded;getComment(p.id)">
+                            <mat-icon
+                                class="icon-size-5 mr-2"
+                                [svgIcon]="'heroicons_solid:chat-alt'"></mat-icon>
+                            <span>Commenter</span>
+                        </button>
+
+                    </div>
+                    <hr class="border-b mx-6 sm:mx-8 mt-4 mb-6">
+                    <div class="flex flex-col sm:flex-row sm:items-center mx-6 sm:mx-8 mb-4 sm:mb-6">
+                        <div class="flex items-center">
+
+
+                            <div class="text-md tracking-tight ml-3" >{{p.likes.length}} aime ça</div>
+                        </div>
+                        <div class="hidden sm:flex flex-auto"></div>
+                        <div class="flex items-center mt-4 sm:mt-0">
+
+                            <button
+                                class="px-3 sm:-mr-4"
+                                mat-button
+                                (click)="expandableCard02.expanded = !expandableCard02.expanded;getComment(p.id)">
+                                <span class="mr-1">{{p.commentaire.length}} Commentaires</span>
+                                <mat-icon
+                                    class="icon-size-5 transform transition-transform ease-in-out duration-150 rotate-0"
+                                    [ngClass]="{'rotate-180': expandableCard02.expanded}"
+                                    [svgIcon]="'heroicons_solid:chevron-down'"></mat-icon>
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <ng-container fuseCardExpansion>
+                        <hr class="border-b m-0">
+                        <hr class="border-b mx-4 sm:mx-8 my-0">
+
+                        <div class="max-h-120 overflow-y-auto" *ngFor="let c of comL">
+                            <div class="relative flex flex-col mx-4 sm:mx-8 my-6">
+                                <div class="flex items-start">
+                                    <img
+                                        class="w-8 h-8 rounded-full mr-4"
+                                        [src]="sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'+ c.users.picture)"
+                                        alt="Card cover image">
+                                    <div class="flex flex-col mt-0.5">
+                                    <span>
+                                        <b>{{c.users.first_name}}{{c.users.name_user}}</b> {{c.text}}                          </span>
+                                        <div class="flex items-center text-sm text-secondary mt-2">
+
+                                            <span class="mr-2">&bull;</span>
+                                            <span>{{c.date|date:'dd-MM-yyyy'}}</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <button
+                            class="px-3"
+                            mat-button
+                            [color]="'primary'"
+                            (click)="CommentShow(p.id)">
+                            Plus de commentaires
+
+                        </button>
+                    </ng-container>
+                    <div class="flex flex-col mx-4 sm:mx-8 mt-6 mb-3">
+
+                        <div class="flex items-start">
+                            <img
+                                class="w-12 h-12 rounded-full mr-5"
+                                [src]="sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'+ user.picture)"
+                                alt="Card cover image">
+                            <mat-form-field class="fuse-mat-textarea fuse-mat-no-subscript w-full">
+                                <textarea
+                                    matInput
+                                    [(ngModel)]="com.text"
+                                    [placeholder]="'Commenter...'"
+                                    [rows]="2"
+                                    (keyup.enter)="Commenter(p.id);openSnackBar()"
+                                    matTextareaAutosize></textarea>
+
+                            <div class="flex items-center mt-3 ml-auto -mr-3">
+
+                                <button (click)="isEmojiPickerVisible = !isEmojiPickerVisible;">😀</button>
+                                <br>
+
+
+                            </div>
+                            </mat-form-field>
+
+                        </div>
+                        <emoji-mart class="emoji-mart" *ngIf="isEmojiPickerVisible"
+                                    (emojiSelect)="addEmoji($event)" title="Choose your emoji"></emoji-mart>
+                    </div>
+
+                </fuse-card>
+
+            </ng-container>
+            <div class="flex flex-col max-w-140 w-full mt-8" >
+
+                <button
+                    class="px-3"
+                    mat-button
+                    [color]="'primary'"
+                    (click)="show()">
+                    Plus de publications
+
+                </button>
+                <!--Scroll to top-->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- status -->
+
+    <div class="modal fade" id="pub" tabindex="-1" role="dialog" aria-labelledby="pubTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+                    <h5 class="modal-title" id="pubTitle">Créer une publication
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <br>
+                <br>
+                <div class="col-span-9">
+                    <div class="fuse-mat-textarea fuse-mat-no-subscript w-full">
+                        <textarea
+                            matInput
+                            placeholder="    Quoi de neuf , {{userData.first_name}} ?"
+                            [rows]="5"
+                            [(ngModel)]="pubAdd.status"
+                            matTextareaAutosize></textarea>
+                    </div>
+
+
+                </div>
+                <br>
+
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-4 sm:mt-6">
+                <div class="flex items-center mt-4 sm:mt-0">
+
+
+                </div>
+                    <div class="flex items-center mt-4 sm:mt-0">
+                    <button
+                        class="order-first sm:order-last"
+                        mat-flat-button
+                        [color]="'primary'"
+                        (click)="addPub()"
+                        data-dismiss="modal"
+                       >
+                        Publier
+                    </button>
+                    </div>
+
+            </div>
+            </div>
+        </div>
+    </div>
+    <!-- vedio -->
+    <div class="modal fade" id="pubV" tabindex="-1" role="dialog" aria-labelledby="pubVTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+                    <h5 class="modal-title" id="pubVTitle">Créer une publication
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <br>
+                <br>
+                <div class="col-span-12">
+                    <div class="fuse-mat-textarea fuse-mat-no-subscript w-full">
+                        <textarea
+                            matInput
+                            placeholder="    Quoi de neuf , {{userData.first_name}} ?"
+                            [rows]="5"
+                            [(ngModel)]="pubAdd.status"
+                            matTextareaAutosize></textarea>
+                    </div>
+
+
+                </div>
+                <br>
+
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-4 sm:mt-6">
+                    <div class="flex items-center mt-4 sm:mt-0">
+                        <input
+                            id="avatar-file-input1"
+                            class="absolute h-0 w-0 opacity-0 invisible pointer-events-none"
+                            type="file"
+                            [multiple]="false"
+                            [accept]="' video/*'"
+                            (change)="uploadAvatar(avatarFileInput1.files)"
+                            #avatarFileInput1>
+                        <label
+                            class="flex items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:bg-hover"
+                            for="avatar-file-input1"
+                            matRipple>
+                            <mat-icon
+                                class="icon-size-5 mr-2"
+                                [svgIcon]="'heroicons_solid:play'"></mat-icon>
+                        </label>
+
+                    </div>
+                    <div class="flex items-center mt-4 sm:mt-0">
+                        <button
+                            class="order-first sm:order-last"
+                            mat-flat-button
+                            [color]="'primary'"
+                            (click)="addPubV()"
+                            data-dismiss="modal"
+                        >
+                            Publier
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- image -->
+    <div class="modal fade" id="pubI" tabindex="-1" role="dialog" aria-labelledby="pubITitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+                    <h5 class="modal-title" id="pubITitle">créer une publication
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <br>
+                <br>
+                <div class="col-span-12">
+                    <div class="fuse-mat-textarea fuse-mat-no-subscript w-full">
+                        <textarea
+                            matInput
+                            placeholder="    Quoi de neuf , {{userData.first_name}} ?"
+                            [rows]="5"
+                            [(ngModel)]="pubAdd.status"
+                            matTextareaAutosize></textarea>
+                    </div>
+
+
+                </div>
+                <br>
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-4 sm:mt-6">
+                    <div class="flex items-center mt-4 sm:mt-0">
+                        <input
+                            id="avatar-file-input2"
+                            class="absolute h-0 w-0 opacity-0 invisible pointer-events-none"
+                            type="file"
+                            [multiple]="false"
+                            [accept]="'image/*'"
+                            (change)="uploadAvatar(avatarFileInput2.files)"
+                            #avatarFileInput2>
+                        <label
+                            class="flex items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:bg-hover"
+                            for="avatar-file-input2"
+                            matRipple>
+                            <mat-icon
+                                class="icon-size-5 mr-2"
+                                [svgIcon]="'heroicons_solid:photograph'"></mat-icon>
+                        </label>
+
+                    </div>
+                    <div class="flex items-center mt-4 sm:mt-0">
+                        <button
+                            class="order-first sm:order-last"
+                            mat-flat-button
+                            [color]="'primary'"
+                            (click)="addPubI()"
+                            data-dismiss="modal"
+                        >
+                            Publier
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- gif -->
+    <div class="modal fade" id="pubG" tabindex="-1" role="dialog" aria-labelledby="pubGTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+                    <h5 class="modal-title" id="pubGTitle">créer une publication
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <br>
+                <br>
+                <div class="col-span-12">
+                    <div class="fuse-mat-textarea fuse-mat-no-subscript w-full">
+                        <textarea
+                            matInput
+                            placeholder="    Quoi de neuf , {{userData.first_name}} ?"
+                            [rows]="5"
+                            [(ngModel)]="pubAdd.status"
+
+                            matTextareaAutosize></textarea>
+                    </div>
+
+
+                </div>
+                <br>
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-4 sm:mt-6">
+                    <div class="flex items-center mt-4 sm:mt-0">
+                        <input
+                            id="avatar-file-input3"
+                            class="absolute h-0 w-0 opacity-0 invisible pointer-events-none"
+                            type="file"
+                            [multiple]="false"
+                            [accept]="'image/*'"
+                            (change)="uploadAvatar(avatarFileInput3.files)"
+                            #avatarFileInput3>
+                        <label
+                            class="flex items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:bg-hover"
+                            for="avatar-file-input3"
+                            matRipple>
+                            <mat-icon
+                                class="icon-size-5 mr-2"
+                                [svgIcon]="'heroicons_solid:sparkles'"></mat-icon>
+                        </label>
+
+                    </div>
+                    <div class="flex items-center mt-4 sm:mt-0">
+                        <button
+                            class="order-first sm:order-last"
+                            mat-flat-button
+                            [color]="'primary'"
+                            (click)="addPubI()"
+                            data-dismiss="modal"
+                        >
+                            Publier
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- demande -->
+    <div class="modal fade" id="dem" tabindex="-1" role="dialog" aria-labelledby="demTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+                    <h5 class="modal-title" id="demTitle">créer une publication
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <br>
+                <br>
+                <div class="col-span-12">
+                    <div class="flex flex-col gt-xs:flex-row">
+                        <mat-form-field class="flex-auto gt-xs:pr-3">
+                            <input
+                                matInput
+                                [placeholder]="'Titre'"
+                                id="Titre" class="input" type="text" placeholder=" " [(ngModel)]="dem.title"/>
+
+                        </mat-form-field>
+
+                    </div>
+                    <div class="flex flex-col gt-xs:flex-row">
+                        <mat-form-field class="flex-auto gt-xs:pr-3">
+                            <input
+                                matInput
+                                [placeholder]="'Description'"
+                                id="Description" class="input" type="text" placeholder=" " [(ngModel)]="dem.description"/>
+
+                        </mat-form-field>
+
+                    </div>
+                    <div class="flex flex-col gt-xs:flex-row">
+                        <mat-form-field class="flex-auto gt-xs:pr-3">
+                            <input
+                                matInput
+                                [placeholder]="'Link'"
+                                id="link" class="input" type="text" placeholder=" " [(ngModel)]="dem.link" />
+
+                        </mat-form-field>
+
+                    </div>
+                    <div class="flex flex-col gt-xs:flex-row">
+                        <mat-form-field class="flex-auto gt-xs:pr-3">
+                            <input
+                                matInput
+                                [placeholder]="'Duration'"
+                                id="Duration" class="input" type="text" placeholder=" " [(ngModel)]="dem.duration"/>
+
+                        </mat-form-field>
+
+                    </div>
+                    <div class="example-container">
+
+                        <mat-form-field class="flex-auto gt-xs:pr-3">
+                            <input
+                                matInput
+                                [matDatepicker]="birthdayDatepicker1"
+                                [(ngModel)]="dem.start_date"
+                                [placeholder]="'Date debut'"
+                            >
+                            <mat-datepicker-toggle
+                                matSuffix
+                                [for]="birthdayDatepicker1">
+                            </mat-datepicker-toggle>
+                            <style>
+                                .mat-datepicker-calendar-pane {
+                                    z-index: 1200;
+                                }
+                            </style>
+                          <mat-datepicker #birthdayDatepicker1 class="mat-datepicker-calendar-pane" ></mat-datepicker>
+
+                        </mat-form-field>
+
+                    </div>
+                    <div class="flex flex-col gt-xs:flex-row">
+                        <mat-form-field class="flex-auto gt-xs:pr-3">
+                            <input
+                                matInput
+                                [matDatepicker]="birthdayDatepicker"
+                                [(ngModel)]="dem.closing_date"
+                                [placeholder]="'Date fin'"
+                            >
+                            <mat-datepicker-toggle
+                                matSuffix
+                                [for]="birthdayDatepicker">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #birthdayDatepicker></mat-datepicker>
+
+
+                        </mat-form-field>
+
+                    </div>
+                </div>
+                <br>
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-4 sm:mt-6">
+                    <div class="flex items-center mt-4 sm:mt-0">
+                         </div>
+                    <div class="flex items-center mt-4 sm:mt-0">
+                        <button
+                            class="order-first sm:order-last"
+                            mat-flat-button
+                            [color]="'primary'"
+                            (click)="addDem()"
+                            data-dismiss="modal"
+                        >
+                            Publier
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <buttonn class="fixed flex items-center justify-center right-0 w-10 h-10 shadow-lg rounded-l-lg z-999 cursor-pointer bg-red-600 bg-opacity-90 print:hidden"
+
+                 *ngIf="isShow" (click)="gotoTop()"><mat-icon
+            class="icon-size-5 mr-2"
+            [svgIcon]="'heroicons_solid:chevron-double-up'" ></mat-icon></buttonn>
+    </div>
+
+</div>
+

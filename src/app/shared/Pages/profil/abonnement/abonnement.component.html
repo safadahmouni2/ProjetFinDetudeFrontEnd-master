@@ -1,0 +1,68 @@
+
+
+<!-- App root -->
+<div class="flex flex-col flex-auto min-w-0">
+    <div style="text-align:center">
+        <h1>Listes des Abonnées</h1>
+        <br>
+
+
+        <!-- Project selector -->
+
+        <mat-spinner class="wrapper" style="margin:0 auto;"
+                     mode="indeterminate" *ngIf="load">    </mat-spinner>
+
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full min-w-0">
+
+            <fuse-card *ngFor="let member of users"
+                       class="flex flex-col max-w-80 w-full filter-article filter-interactive"
+                       [flippable]="true"
+                       [face]="'front'"
+                       #flippableCard01="fuseCard">
+                <ng-container fuseCardFront >
+
+                    <div class="flex flex-col flex-auto items-center bg-card shadow rounded-xl overflow-hidden">
+                        <!-- Avatar & Info -->
+
+                        <div class="flex flex-col flex-auto w-full p-8 text-center">
+
+
+                            <div class="w-32 h-32 mx-auto rounded-full overflow-hidden">
+                                <ng-container *ngIf="member.picture">
+                                    <img
+                                        class="object-cover w-full h-full"
+                                        [src]="sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'+ member.picture )"
+                                        alt=""/>
+                                </ng-container>
+                                <ng-container *ngIf="!member.picture">
+                                    <div class="flex items-center    text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                                        {{member.first_name.charAt(0)}}
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <div class="flex flex-col">
+                                <button class="font-semibold leading-none" (click)="profilDetails(member.id)">
+                                    {{member.first_name}} {{member.name_user}}</button>
+                            </div>
+
+
+                        </div>
+                        <!-- Email & Phone -->
+                        <div class="flex items-center w-full border-t divide-x">
+                            <a
+                                class="flex flex-auto items-center justify-center py-4 hover:bg-hover"
+                                >
+                                <mat-icon
+                                    class="icon-size-5 text-hint"
+                                    [svgIcon]="'heroicons_solid:x-circle'"></mat-icon>
+                                <button mat-button disabled (click)="desabonner()"><span class="ml-2" >Se désabonner</span></button>
+                            </a>
+                        </div>
+                    </div>
+                </ng-container>
+            </fuse-card>
+        </div>
+    </div>
+</div>
+
