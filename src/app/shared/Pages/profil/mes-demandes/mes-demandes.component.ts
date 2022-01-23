@@ -1,21 +1,21 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {JwtHelperService} from "@auth0/angular-jwt";
-import {DemandeModule} from "../../../Models/demande.module";
-import {PublictionModule} from "../../../Models/publiction.module";
-import {UsersModels} from "../../../Models/Users.models";
-import {UsersService} from "../../../Services/users.service";
-import {ServiceRequestService} from "../../../Services/service-request.service";
-import {PublicationsService} from "../../../Services/publications.service";
-import {DomSanitizer} from "@angular/platform-browser";
-import {PublictionAddModule} from "../../../Models/publictionAdd.module";
-import {AddDemComponent} from "../../service-request/add-dem/add-dem.component";
-import {MatDialog} from "@angular/material/dialog";
-import {Router} from "@angular/router";
-import {CompetanceFilesModels} from "../../../Models/Competance-files.models";
-import {CompetanceFilesService} from "../../../Services/competance-files.service";
-import {PostuleModels} from "../../../Models/Postule.models";
-import {AbonneeService} from "../../../Services/abonnee.service";
-import {AbonneeModels} from "../../../Models/abonnee.models";
+import {JwtHelperService} from '@auth0/angular-jwt';
+import {DemandeModule} from '../../../Models/demande.module';
+import {PublictionModule} from '../../../Models/publiction.module';
+import {UsersModels} from '../../../Models/Users.models';
+import {UsersService} from '../../../Services/users.service';
+import {ServiceRequestService} from '../../../Services/service-request.service';
+import {PublicationsService} from '../../../Services/publications.service';
+import {DomSanitizer} from '@angular/platform-browser';
+import {PublictionAddModule} from '../../../Models/publictionAdd.module';
+import {AddDemComponent} from '../../service-request/add-dem/add-dem.component';
+import {MatDialog} from '@angular/material/dialog';
+import {Router} from '@angular/router';
+import {CompetanceFilesModels} from '../../../Models/Competance-files.models';
+import {CompetanceFilesService} from '../../../Services/competance-files.service';
+import {PostuleModels} from '../../../Models/Postule.models';
+import {AbonneeService} from '../../../Services/abonnee.service';
+import {AbonneeModels} from '../../../Models/abonnee.models';
 
 @Component({
   selector: 'app-mes-demandes',
@@ -33,6 +33,7 @@ export class MesDemandesComponent implements OnInit {
         title: this.decodedToken.title,
         login: this.decodedToken.login,
         pwd: this.decodedToken.pwd,
+        confirmPassword:this.decodedToken.confirmPassword,
         gender: this.decodedToken.gender,
         age: this.decodedToken.age,
         phone: this.decodedToken.phone,
@@ -53,13 +54,13 @@ export class MesDemandesComponent implements OnInit {
     pub: PublictionModule;
     pubAdd: PublictionAddModule;
     abonnee: AbonneeModels;
-    abonnement:AbonneeModels;
+    abonnement: AbonneeModels;
     pubL: Array<PublictionModule>=[];
     MespubL: Array<PublictionModule>=[];
     competanceF: Array<PostuleModels>;
 
     user: UsersModels;
-    listuser:Array<UsersModels>=[];
+    listuser: Array<UsersModels>=[];
     topPosToStartShowing = 100;
     isShow: boolean;
 
@@ -258,7 +259,7 @@ export class MesDemandesComponent implements OnInit {
             });
     }
     getCV(id) {
-        let list = [];
+        const list = [];
 
         this.competanceFilesService.getCV(id,this.n,this.s).subscribe((reslt) => {
             this.competanceF = reslt;

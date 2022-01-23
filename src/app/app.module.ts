@@ -14,6 +14,7 @@ import { appRoutes } from 'app/app.routing';
 import {HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {MatChipsModule} from '@angular/material/chips';
+// @ts-ignore
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatIconModule} from '@angular/material/icon';
@@ -56,6 +57,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {PickerModule} from '@ctrl/ngx-emoji-mart';
 import {MatSnackBar} from '@angular/material/snack-bar';
+
 const routerConfig: ExtraOptions = {
     scrollPositionRestoration: 'enabled',
     preloadingStrategy       : PreloadAllModules
@@ -86,7 +88,7 @@ const routerConfig: ExtraOptions = {
         BrowserModule,
 
         HttpClientModule,
-
+        ReactiveFormsModule,
         RouterModule,
         MatChipsModule,
         ReactiveFormsModule,

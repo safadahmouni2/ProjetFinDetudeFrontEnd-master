@@ -12,7 +12,7 @@ import {Contact, Country} from '../../../../modules/admin/apps/contacts/contacts
 import {FormControl, FormGroup, NgForm} from '@angular/forms';
 import {DOCUMENT} from '@angular/common';
 import {FuseMediaWatcherService} from '../../../../../@fuse/services/media-watcher';
-import {AuthentService} from "../../../Services/authent.service";
+import {AuthentService} from '../../../Services/authent.service';
 
 @Component({
   selector: 'app-users',
@@ -46,7 +46,7 @@ export class UsersComponent implements OnInit {
 
 
         this.authentService.register(this.userM.name_user,this.userM.first_name,this.userM.email,this.userM.title,this.userM.login,
-            this.userM.pwd,this.userM.gender,this.userM.age,this.userM.phone,this.userM.date_birth ,this.userM.pays,this.userM.description, this.selectedFile  ).subscribe((reslt) => {
+            this.userM.pwd,this.userM.confirmPassword,this.userM.gender,this.userM.age,this.userM.phone,this.userM.date_birth ,this.userM.pays,this.userM.description, this.selectedFile  ).subscribe((reslt) => {
             add = reslt;
         });}
     clearForm(): void

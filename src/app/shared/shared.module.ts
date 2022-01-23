@@ -58,6 +58,7 @@ import {ListeAbonneeComponent} from './Pages/profil/abonnee/liste-abonnee/liste-
 import {AddAbonneeComponent} from './Pages/profil/abonnee/add-abonnee/add-abonnee.component';
 import { AbonnementComponent } from './Pages/profil/abonnement/abonnement.component';
 import { ChoixCompteComponent } from './Pages/register/choix-compte/choix-compte.component';
+import {CompaniesComponent} from './Pages/companies/companies.component';
 
 @NgModule({
     imports: [
@@ -105,6 +106,7 @@ import { ChoixCompteComponent } from './Pages/register/choix-compte/choix-compte
         ReactiveFormsModule
     ],
     declarations: [
+
         AbonnementComponent,
         ListeAbonneeComponent,
         AddAbonneeComponent,
@@ -130,6 +132,7 @@ DetailsComponent,
         MesDemandesComponent,
         MesPostuleComponent,
         DetailsProfilComponent,
+
         AbonnementComponent,
         ChoixCompteComponent
     ],
@@ -146,3 +149,4 @@ DetailsComponent,
 export class SharedModule
 {
 }
+

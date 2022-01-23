@@ -10,14 +10,14 @@ import {DOCUMENT} from '@angular/common';
 import {DemandeModule} from '../../Models/demande.module';
 import {ServiceRequestService} from '../../Services/service-request.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {UsersService} from "../../Services/users.service";
-import {JwtHelperService} from "@auth0/angular-jwt";
-import {PublictionAddModule} from "../../Models/publictionAdd.module";
-import {DemandeComp} from "../../Models/DemandeComp";
-import {AimeModels} from "../../Models/Aime.models";
-import content from "*.scss";
-import {CommentModels} from "../../Models/Comment.models";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {UsersService} from '../../Services/users.service';
+import {JwtHelperService} from '@auth0/angular-jwt';
+import {PublictionAddModule} from '../../Models/publictionAdd.module';
+import {DemandeComp} from '../../Models/DemandeComp';
+import {AimeModels} from '../../Models/Aime.models';
+import content from '*.scss';
+import {CommentModels} from '../../Models/Comment.models';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-publications',
@@ -36,12 +36,13 @@ export class PublicationsComponent implements OnInit {
         title: this.decodedToken.title,
         login: this.decodedToken.login,
         pwd: this.decodedToken.pwd,
+        confirmPassword:this.decodedToken.confirmPassword,
         gender: this.decodedToken.gender,
         age: this.decodedToken.age,
         phone: this.decodedToken.phone,
         date_birth: this.decodedToken.date_birth,
         pays: this.decodedToken.pays,
-        role: this.decodedToken.aud.substring(1, this.decodedToken.aud.length - 1).split(","),
+        role: this.decodedToken.aud.substring(1, this.decodedToken.aud.length - 1).split(','),
     };
     competanceF: Array<CompetanceFilesModels>;
 
@@ -69,7 +70,7 @@ export class PublicationsComponent implements OnInit {
     public textArea: string = '';
     public isEmojiPickerVisible: boolean;
     ButtonEtat: boolean;
-    @Input()addcom:any;
+    @Input()addcom: any;
     constructor(private competanceFilesService: CompetanceFilesService,private _snackBar: MatSnackBar,
         private usersService: UsersService, private requestService: ServiceRequestService, private publicationsService: PublicationsService, private router: Router
         , private sanitizer: DomSanitizer) {
@@ -203,12 +204,12 @@ export class PublicationsComponent implements OnInit {
         const decodedToken = helper.decodeToken(token.toString());
         const userData = {email: decodedToken.email, userId: decodedToken.userId};
 
-        let competanceFilesCopie = Object.assign({}, this.pubAdd);
+        const competanceFilesCopie = Object.assign({}, this.pubAdd);
 
         competanceFilesCopie.users = {
             id: decodedToken.id, name_user: decodedToken.name_user, first_name: decodedToken.first_name,
             email: decodedToken.email,
-            title: decodedToken.title, login: decodedToken.login, pwd: decodedToken.pwd,
+            title: decodedToken.title, login: decodedToken.login, pwd: decodedToken.pwd,confirmPassword:decodedToken.confirmPassword,
             gender: decodedToken.gender, age: decodedToken.age, phone: decodedToken.phone,
             date_birth: decodedToken.date_birth,
             description: decodedToken.description,
@@ -232,11 +233,11 @@ export class PublicationsComponent implements OnInit {
         const decodedToken = helper.decodeToken(token.toString());
         const userData = {email: decodedToken.email, userId: decodedToken.userId};
 
-        let competanceFilesCopie = Object.assign({}, this.pubAdd);
+        const competanceFilesCopie = Object.assign({}, this.pubAdd);
         competanceFilesCopie.users = {
             id: decodedToken.id, name_user: decodedToken.name_user, first_name: decodedToken.first_name,
             email: decodedToken.email,
-            title: decodedToken.title, login: decodedToken.login, pwd: decodedToken.pwd,
+            title: decodedToken.title, login: decodedToken.login, pwd: decodedToken.pwd,confirmPassword:decodedToken.confirmPassword,
             gender: decodedToken.gender, age: decodedToken.age, phone: decodedToken.phone,
             date_birth: decodedToken.date_birth,
             description: decodedToken.description,
@@ -260,12 +261,12 @@ export class PublicationsComponent implements OnInit {
         const decodedToken = helper.decodeToken(token.toString());
         const userData = {email: decodedToken.email, userId: decodedToken.userId};
 
-        let competanceFilesCopie = Object.assign({}, this.pubAdd);
+        const competanceFilesCopie = Object.assign({}, this.pubAdd);
 
         competanceFilesCopie.users = {
             id: decodedToken.id, name_user: decodedToken.name_user, first_name: decodedToken.first_name,
             email: decodedToken.email,
-            title: decodedToken.title, login: decodedToken.login, pwd: decodedToken.pwd,
+            title: decodedToken.title, login: decodedToken.login, pwd: decodedToken.pwd,confirmPassword:decodedToken.confirmPassword,
             gender: decodedToken.gender, age: decodedToken.age, phone: decodedToken.phone,
             date_birth: decodedToken.date_birth,
             description: decodedToken.description,
@@ -293,12 +294,12 @@ export class PublicationsComponent implements OnInit {
         const decodedToken = helper.decodeToken(token.toString());
         const userData = {email: decodedToken.email, userId: decodedToken.userId};
 
-        let competanceFilesCopie = Object.assign({}, this.dem);
+        const competanceFilesCopie = Object.assign({}, this.dem);
 
         competanceFilesCopie.users = {
             id: decodedToken.id, name_user: decodedToken.name_user, first_name: decodedToken.first_name,
             email: decodedToken.email,
-            title: decodedToken.title, login: decodedToken.login, pwd: decodedToken.pwd,
+            title: decodedToken.title, login: decodedToken.login, pwd: decodedToken.pwd,confirmPassword:decodedToken.confirmPassword,
             gender: decodedToken.gender, age: decodedToken.age, phone: decodedToken.phone,
             date_birth: decodedToken.date_birth,
             description: decodedToken.description,
@@ -336,7 +337,7 @@ export class PublicationsComponent implements OnInit {
         });
         index = this.pubL.findIndex((value)=>{
             if(value===this.userData.id)
-                this.pubL.splice(index,1);
+                {this.pubL.splice(index,1);}
         });
     }
 
@@ -355,7 +356,7 @@ export class PublicationsComponent implements OnInit {
     }
 
     getComment(id) {
-        let list=[];
+        const list=[];
         this.publicationsService.getComment(id, this.nc, this.sc).subscribe((reslt) => {
             this.comL= reslt;
             this.nc=0;
@@ -394,7 +395,7 @@ export class PublicationsComponent implements OnInit {
         this.isEmojiPickerVisible = false;
     }
     reloadCurrentRoute() {
-        let currentUrl = this.router.url;
+        const currentUrl = this.router.url;
         this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
             this.router.navigate([currentUrl]);
         });
@@ -403,11 +404,11 @@ export class PublicationsComponent implements OnInit {
         this._snackBar.open('success', 'Ok');
     }
 
-    likeFunct(listUser,idUser):boolean{
+    likeFunct(listUser,idUser): boolean{
 
         if(listUser.some(user => user=== idUser)){
             return true;
-        }else return false;
+        }else {return false;}
 
 
         }
