@@ -11,8 +11,8 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {errorObject} from 'rxjs/internal-compatibility';
 import {MatChipInputEvent} from '@angular/material/chips';
-import {JwtHelperService} from "@auth0/angular-jwt";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {JwtHelperService} from '@auth0/angular-jwt';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -243,11 +243,11 @@ export class CompetanceFilesComponent implements OnInit {
       const decodedToken = helper.decodeToken(token.toString());
       const userData = {email: decodedToken.email, userId: decodedToken.userId};
 
-       let competanceFilesCopie = Object.assign({}, this.competanceFiles);
+       const competanceFilesCopie = Object.assign({}, this.competanceFiles);
 
       competanceFilesCopie.users={ id: decodedToken.id,name_user: decodedToken.name_user,first_name: decodedToken.first_name,
           email: decodedToken.email,
-          title: decodedToken.title,login: decodedToken.login,pwd: decodedToken.pwd,
+          title: decodedToken.title,login: decodedToken.login,pwd: decodedToken.pwd,confirmPassword:decodedToken.confirmPassword,
           gender: decodedToken.gender,age: decodedToken.age,phone: decodedToken.phone,
           date_birth: decodedToken.date_birth,
           description: decodedToken.description,

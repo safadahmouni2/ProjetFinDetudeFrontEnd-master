@@ -3,8 +3,8 @@ import {Observable} from 'rxjs';
 import {CompetanceFilesModels} from '../Models/Competance-files.models';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment.prod';
-import {UsersModels} from "../Models/Users.models";
-import {GroupsModels} from "../Models/Groups.models";
+import {UsersModels} from '../Models/Users.models';
+import {GroupsModels} from '../Models/Groups.models';
 
 @Injectable({
   providedIn: 'root'
@@ -27,11 +27,11 @@ export class UsersService {
         return this.httpClient.get<any>(`${this.API_URL}/Users/getNBRUsers`);}
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    addUser(name_user,first_name,email,title,login,pwd,gender,age,phone,date_birth, file: File): Observable<any> {
+    addUser(name_user,first_name,email,title,login,pwd,confirmPassword,gender,age,phone,date_birth, file: File): Observable<any> {
         const data: FormData = new FormData();
         data.append('file', file, file.name);
         data.append('u', new Blob([JSON.stringify({
-            name_user,first_name,email,title,login,pwd,gender,age,phone,date_birth
+            name_user,first_name,email,title,login,pwd,confirmPassword,gender,age,phone,date_birth
         })], { type: 'application/json' }));
         return this.httpClient.post(`${this.API_URL}/Users/addUser`, data);
     }
@@ -70,7 +70,7 @@ export class UsersService {
     serchUserByName(name_user): Observable<Array<UsersModels>> {
         const headers = {
             'Content-Type': 'application/json; charset=utf-8',
-            Accept: 'application/json',
+            'Accept': 'application/json',
             'Access-Control-Allow-Origin': '*'
         };
         return this.httpClient.post<Array<UsersModels>>(`${this.API_URL}/Users/findByNameLike`,

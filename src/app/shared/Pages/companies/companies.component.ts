@@ -1,10 +1,15 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {UsersModels} from '../../Models/Users.models';
-import {FormGroup, NgForm} from '@angular/forms';
+import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 import {FuseAlertType} from '../../../../@fuse/components/alert';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {AuthentService} from '../../Services/authent.service';
+import {CompanieModels} from '../../Models/Companie.models';
+// import custom validator to validate that password and confirm password fields match
+import {MustMatch} from '../_helpers/must-match.validator';
+
+
 
 @Component({
   selector: 'app-companies',
@@ -12,9 +17,10 @@ import {AuthentService} from '../../Services/authent.service';
   styleUrls: ['./companies.component.css']
 })
 export class CompaniesComponent implements OnInit {
-    userM: UsersModels;
+    companies: CompanieModels;
     selectedFile: File;
 
+    // eslint-disable-next-line @typescript-eslint/member-ordering
     @ViewChild('signUpNgForm') signUpNgForm: NgForm
     ;
 
@@ -24,31 +30,61 @@ export class CompaniesComponent implements OnInit {
     };
     signUpForm: FormGroup;
     showAlert: boolean = false;
-    constructor(private _snackBar: MatSnackBar,private _router: Router,private authentService: AuthentService) { }
+    registerForm: FormGroup;
+    submitted = false;
+
+    constructor(private _snackBar: MatSnackBar,private _router: Router,private authentService: AuthentService,
+                private formBuilder: FormBuilder) { }
 
     ngOnInit(): void {
-        this.userM=new UsersModels();
+        this.companies=new CompanieModels();
+        this.registerForm = this.formBuilder.group({
+            name: ['', Validators.required],
+            siret: ['', Validators.required],
+            email: ['', [Validators.required, Validators.email]],
+            address: ['', [Validators.required]],
+
+            fonction: ['', [Validators.required]],
+            responsable: ['', [Validators.required]],
+            phone: ['', [Validators.required]],
+
+            fax: ['', [Validators.required]],
+
+            password: ['', [Validators.required, Validators.minLength(7),
+                Validators.pattern('^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$'),Validators.maxLength(16)]],
+            confirmPassword: ['',
+               Validators.required]
+        }, {
+            validator: MustMatch('password', 'confirmPassword')
+        });
     }
+// convenience getter for easy access to form fields
+
+
+    get f() { return this.registerForm.controls; }
+
+
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     openSnackBar() {
         this._snackBar.open('Votre inscription a étè validée', 'Ok');
-    }
-    signUp(): void
-    {
-        let add: any;
-
-
-        this.authentService.register(this.userM.name_user,this.userM.first_name,this.userM.email,this.userM.title,this.userM.login,
-            this.userM.pwd,this.userM.gender,this.userM.age,this.userM.phone,this.userM.date_birth ,this.userM.pays,this.userM.description, this.selectedFile  ).subscribe((reslt) => {
-            add = reslt;
-
-        });
-
-
     }
     uploadAvatar(fileList: FileList): void
     {
         this.selectedFile = fileList[0];
 
     }
+
+onSubmit() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.registerForm.invalid) {
+        return;
+    }
+
+    // display form values on success
+    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+}
+
 
 }

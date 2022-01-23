@@ -63,6 +63,7 @@ export const appRoutes: Route[] = [
            // {path: 'reset-password', loadChildren: () => import('app/modules/auth/reset-password/reset-password.module').then(m => m.AuthResetPasswordModule)},
             //{path: 'sign-in', loadChildren: () => import('app/modules/auth/sign-in/sign-in.module').then(m => m.AuthSignInModule)},
             {path: 'choix-compte', component: ChoixCompteComponent},
+            {path:'sign-in',component: LoginComponent},
             {path: 'sign-up',component: RegisterComponent },
             {path: 'sign-up-companie', component: CompaniesComponent},
         ]

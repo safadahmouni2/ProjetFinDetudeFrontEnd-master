@@ -13,8 +13,8 @@ import {AddDemComponent} from '../../service-request/add-dem/add-dem.component';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {MailboxComposeComponent} from '../../../../modules/admin/apps/mailbox/compose/compose.component';
 import {Router} from '@angular/router';
-import {AbonneeModels} from "../../../Models/abonnee.models";
-import {AbonneeService} from "../../../Services/abonnee.service";
+import {AbonneeModels} from '../../../Models/abonnee.models';
+import {AbonneeService} from '../../../Services/abonnee.service';
 
 @Component({
   selector: 'app-profil',
@@ -32,6 +32,7 @@ export class ProfilComponent implements OnInit {
         title: this.decodedToken.title,
         login: this.decodedToken.login,
         pwd: this.decodedToken.pwd,
+        confirmPassword:this.decodedToken.confirmPassword,
         gender: this.decodedToken.gender,
         age: this.decodedToken.age,
         phone: this.decodedToken.phone,
@@ -48,11 +49,11 @@ export class ProfilComponent implements OnInit {
     pub: PublictionModule;
     pubAdd: PublictionAddModule;
     listuser: Array<UsersModels>=[];
-    listabonnees:Array<UsersModels>=[];
+    listabonnees: Array<UsersModels>=[];
     pubL: Array<PublictionModule>=[];
     user: UsersModels;
-    abonnee:AbonneeModels;
-    abonnement:AbonneeModels;
+    abonnee: AbonneeModels;
+    abonnement: AbonneeModels;
     byte: Byte[];
     topPosToStartShowing = 100;
     isShow: boolean;
@@ -189,9 +190,14 @@ export class ProfilComponent implements OnInit {
 
         const competanceFilesCopie = Object.assign({}, this.pubAdd);
 
-        competanceFilesCopie.users={ id: decodedToken.id,name_user: decodedToken.name_user,first_name: decodedToken.first_name,
+        competanceFilesCopie.users={ id: decodedToken.id,
+            name_user: decodedToken.name_user,
+            first_name: decodedToken.first_name,
             email: decodedToken.email,
-            title: decodedToken.title,login: decodedToken.login,pwd: decodedToken.pwd,
+            title: decodedToken.title,
+            login: decodedToken.login,
+            pwd: decodedToken.pwd,
+            confirmPassword:decodedToken.confirmPassword,
             gender: decodedToken.gender,age: decodedToken.age,phone: decodedToken.phone,
             date_birth: decodedToken.date_birth,
             description: decodedToken.description,
@@ -217,6 +223,7 @@ export class ProfilComponent implements OnInit {
         competanceFilesCopie.users={ id: decodedToken.id,name_user: decodedToken.name_user,first_name: decodedToken.first_name,
             email: decodedToken.email,
             title: decodedToken.title,login: decodedToken.login,pwd: decodedToken.pwd,
+            confirmPassword:decodedToken.confirmPassword,
             gender: decodedToken.gender,age: decodedToken.age,phone: decodedToken.phone,
             date_birth: decodedToken.date_birth,
             description: decodedToken.description,
@@ -244,7 +251,7 @@ export class ProfilComponent implements OnInit {
 
         competanceFilesCopie.users={ id: decodedToken.id,name_user: decodedToken.name_user,first_name: decodedToken.first_name,
             email: decodedToken.email,
-            title: decodedToken.title,login: decodedToken.login,pwd: decodedToken.pwd,
+            title: decodedToken.title,login: decodedToken.login,pwd: decodedToken.pwd,confirmPassword:decodedToken.confirmPassword,
             gender: decodedToken.gender,age: decodedToken.age,phone: decodedToken.phone,
             date_birth: decodedToken.date_birth,
             description: decodedToken.description,
@@ -284,7 +291,7 @@ export class ProfilComponent implements OnInit {
 
         competanceFilesCopie.users={ id: decodedToken.id,name_user: decodedToken.name_user,first_name: decodedToken.first_name,
             email: decodedToken.email,
-            title: decodedToken.title,login: decodedToken.login,pwd: decodedToken.pwd,
+            title: decodedToken.title,login: decodedToken.login,pwd: decodedToken.pwd,confirmPassword:decodedToken.confirmPassword,
             gender: decodedToken.gender,age: decodedToken.age,phone: decodedToken.phone,
             date_birth: decodedToken.date_birth,
             description: decodedToken.description,
